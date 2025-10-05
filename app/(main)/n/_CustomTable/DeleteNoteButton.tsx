@@ -1,5 +1,6 @@
 "use client";
 import { deleteNote } from "@/actions/note-actions";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useTransition } from "react";
@@ -27,7 +28,7 @@ const DeleteNoteButton = ({ noteId }: { noteId: string }) => {
 
   return (
     <Button onClick={handleClick} disabled={pending} variant="destructive">
-      Delete
+      {pending ? <LoadingSpinner /> : "Delete"}
     </Button>
   );
 };
