@@ -13,6 +13,47 @@ export const getFirstName = (fullname: string) => {
   return firstName;
 };
 
+export const formatDate = (noteDate: Date) => {
+  const now = new Date();
+  const yesterday = new Date(now);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  const time = noteDate.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  const isToday = noteDate.toDateString() === now.toDateString();
+  const isYesterday = noteDate.toDateString() === yesterday.toDateString();
+
+  if (isToday) {
+    return `Today, ${time}`;
+  }
+  if (isYesterday) {
+    return `Yesterday, ${time}`;
+  }
+
+  const isThisYear = noteDate.getFullYear() === now.getFullYear();
+  const dateWithoutYear = noteDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+  const dateWithYear = noteDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  if (isThisYear) {
+    return `${dateWithoutYear}, ${time}`;
+  }
+
+  return `${dateWithYear}, ${time}`;
+};
+
 export const truncateTitle = (title: string) => {
   const maxLength = 22;
   const firstLineLength = 15;
