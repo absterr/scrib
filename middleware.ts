@@ -8,20 +8,13 @@ const authRoutes = new Set([
   "/reset-password",
 ]);
 
-/*
-  const EXCLUDES = [
-    "api",
-    "_next/static",
-    "_next/image",
-    "favicon.ico",
-    ".*\\.(png|jpg|jpeg|svg|gif|ico|webp|avif)$",
-    "login",
-    "signup",
-    "forgot-password",
-    "reset-password",
-    "email-verified",
-  ];
-*/
+const EXCLUDES = [
+  "api",
+  "_next/static",
+  "_next/image",
+  "favicon.ico",
+  ".*\\.(png|jpg|jpeg|svg|gif|ico|webp|avif)$",
+];
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
@@ -38,8 +31,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/chat", "/invite/:id*", "/n", "/pricing"],
-
-  // OR TRY:
-  // `/((?!${EXCLUDES.join("|")}).*)`
+  matcher: [`/((?!${EXCLUDES.join("|")}).*)`],
 };
