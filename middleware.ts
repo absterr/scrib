@@ -8,14 +8,6 @@ const authRoutes = new Set([
   "/reset-password",
 ]);
 
-const EXCLUDES = [
-  "api",
-  "_next/static",
-  "_next/image",
-  "favicon.ico",
-  ".*\\.(png|jpg|jpeg|svg|gif|ico|webp|avif)$",
-];
-
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const pathname = request.nextUrl.pathname;
@@ -31,5 +23,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [`/((?!${EXCLUDES.join("|")}).*)`],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(png|jpg|jpeg|svg|gif|ico|webp|avif)$).*)",
+  ],
 };
