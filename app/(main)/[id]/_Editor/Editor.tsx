@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { WebsocketProvider } from "y-websocket";
 import * as Y from "yjs";
+import NoteTitle from "./NoteTitle";
 const Blocknote = dynamic(() => import("./Blocknote"), {
   ssr: false,
   loading: () => (
@@ -48,7 +49,12 @@ const Editor = ({ roomId }: { roomId: string }) => {
   };
 
   return (
-    <Blocknote doc={docRef.current} provider={provider} userInfo={userInfo} />
+    <>
+      <div className="mx-13">
+        <NoteTitle doc={docRef.current} />
+      </div>
+      <Blocknote doc={docRef.current} provider={provider} userInfo={userInfo} />
+    </>
   );
 };
 
