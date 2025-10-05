@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { checkCollaborator, checkNote } from "@/lib/queries";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
+import Editor from "./_Editor";
 
 const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const session = await auth.api.getSession({
@@ -26,7 +27,13 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
     );
 
-  return <section></section>;
+  return (
+    <section>
+      <div className="max-w-5xl py-24 mx-auto px-4">
+        <Editor roomId={id} />
+      </div>
+    </section>
+  );
 };
 
 export default NotePage;
