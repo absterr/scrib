@@ -3,6 +3,7 @@ import { getUserRecentNotes } from "@/lib/queries";
 import { getFirstName } from "@/lib/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import CustomCarousel from "./_CustomCarousel";
 
 const HomePage = async () => {
   const session = await auth.api.getSession({
@@ -24,7 +25,9 @@ const HomePage = async () => {
 
       <div>
         <h2 className="font-light text-lg mb-4">Recent notes</h2>
-        <div></div>
+        <div>
+          <CustomCarousel notes={userRecentNotes} />
+        </div>
       </div>
     </section>
   );
