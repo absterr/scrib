@@ -1,4 +1,7 @@
 import Footer from "../Footer";
+import FAQ from "./FAQ";
+import PricingToggle from "./_PricingToggle";
+import { pricingFAQs } from "./details";
 
 const PricingPage = () => (
   <>
@@ -15,14 +18,20 @@ const PricingPage = () => (
         </header>
       </section>
 
-      <section className="w-full max-w-5xl"></section>
+      <section className="w-full max-w-5xl">
+        <PricingToggle />
+      </section>
 
       <section className="py-36 flex flex-col gap-18">
         <h2 className="font-bold text-5xl text-center">
           Frequently asked questions
         </h2>
 
-        <div className="w-3xl flex flex-col gap-3"></div>
+        <div className="w-3xl flex flex-col gap-3">
+          {pricingFAQs.map(({ question, answer }) => (
+            <FAQ key={question} question={question} answer={answer} />
+          ))}
+        </div>
 
         <p className="text-center font-semibold">
           Still have more questions? Contact out support team.
