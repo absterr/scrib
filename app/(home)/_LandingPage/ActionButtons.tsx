@@ -4,7 +4,9 @@ import Link from "next/link";
 const ActionButtons = () => (
   <div className="flex gap-4 justify-center pt-8">
     <Link href={"/signup"}>
-      <Button className="rounded-3xl text-base py-6 border">Get started</Button>
+      <Button className="rounded-3xl text-base border border-black py-6">
+        Get started
+      </Button>
     </Link>
     <Link href={"/pricing"}>
       <Button
