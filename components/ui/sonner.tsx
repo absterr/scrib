@@ -13,17 +13,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
       richColors
       style={
         {
-          "--normal-bg": "hsl(var(--background))",
-          "--normal-text": "hsl(var(--foreground))",
-          "--normal-border": "hsl(var(--border))",
-
-          "--success-bg": "hsl(var(--success))",
-          "--success-text": "hsl(var(--success-foreground))",
-          "--success-border": "hsl(var(--success))",
-
-          "--destructive-bg": "hsl(var(--destructive))",
-          "--destructive-text": "hsl(var(--destructive-foreground))",
-          "--destructive-border": "hsl(var(--destructive))",
+          "--success-bg": "var(--success)",
+          "--success-text": "var(--primary)",
+          "--success-border": "var(--success)",
         } as React.CSSProperties
       }
       {...props}
