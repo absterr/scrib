@@ -2,14 +2,14 @@ import { auth } from "@/lib/auth";
 import { getUserRecentNotes } from "@/lib/queries";
 import { getFirstName } from "@/lib/utils";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import CustomCarousel from "./_CustomCarousel";
+import LandingPage from "./_LandingPage";
 
 const HomePage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (!session || !session.user) redirect("/login");
+  if (!session || !session.user) return <LandingPage />;
 
   const userInfo = {
     id: session.user.id,

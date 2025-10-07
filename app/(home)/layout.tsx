@@ -5,7 +5,7 @@ import AppSidebar from "../_AppSidebar";
 import CustomTrigger from "../CustomTrigger";
 import Navbar from "../Navbar";
 
-export default async function AppLayout({
+export default async function HomeLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await auth.api.getSession({

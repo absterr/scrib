@@ -10,13 +10,14 @@ const LogoutButton = () => {
   const [isPending, startTransition] = useTransition();
 
   const handleLogout = () => {
-    toast.loading("Logging out...");
+    const logout = toast.loading("Logging out...");
     startTransition(async () => {
       try {
         await signOut({
           fetchOptions: {
             onSuccess: () => {
               router.replace("/login");
+              toast.dismiss(logout);
             },
           },
         });

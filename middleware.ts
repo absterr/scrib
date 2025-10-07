@@ -7,14 +7,16 @@ const authRoutes = new Set([
   "/forgot-password",
   "/reset-password",
 ]);
+const leadRoutes = new Set(["/", "/pricing"]);
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const pathname = request.nextUrl.pathname;
   const isAuthRoute = authRoutes.has(pathname);
+  const isLeadRoute = leadRoutes.has(pathname);
 
   if (!sessionCookie) {
-    if (isAuthRoute) return NextResponse.next();
+    if (isAuthRoute || isLeadRoute) return NextResponse.next();
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

@@ -27,7 +27,7 @@ const Navbar = () => {
               Log in
             </Link>
             <Link href={"/signup"}>
-              <Button className="rounded-3xl text-base py-6 border hover:cursor-pointer">
+              <Button className="rounded-3xl text-base py-6 hover:cursor-pointer">
                 Join for free
               </Button>
             </Link>
