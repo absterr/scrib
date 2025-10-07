@@ -1,20 +1,16 @@
 "use client";
+import { signOut } from "@/lib/auth-client";
+import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { signOut } from "@/lib/auth-client";
-import { useToast } from "@/components/ui/use-toast";
-import { LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 const LogoutButton = () => {
   const router = useRouter();
-  const [pending, startTransition] = useTransition();
-  const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
   const handleLogout = () => {
-    toast({
-      description: "Logging out...",
-      variant: "default",
-    });
+    toast.loading("Logging out...");
     startTransition(async () => {
       try {
         await signOut({
@@ -28,10 +24,7 @@ const LogoutButton = () => {
         if (error instanceof Error) {
           console.error(error.message);
         }
-        toast({
-          description: "Couldn't log out, please try again.",
-          variant: "destructive",
-        });
+        toast.error("Couldn't log out, please try again.");
       }
     });
   };
@@ -39,7 +32,7 @@ const LogoutButton = () => {
   return (
     <button
       onClick={handleLogout}
-      disabled={pending}
+      disabled={isPending}
       className="flex items-center gap-2"
     >
       <LogOut />

@@ -2,15 +2,14 @@
 import { createNote } from "@/actions/note-actions";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
 import { useSession } from "@/lib/auth-client";
 import { NotebookPen } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { toast } from "sonner";
 
 const NewNoteCard = () => {
   const router = useRouter();
-  const { toast } = useToast();
   const [pending, startTransition] = useTransition();
   const { data, isPending } = useSession();
 
@@ -23,10 +22,7 @@ const NewNoteCard = () => {
         const newNote = await createNote(data.user.id);
         if (newNote) router.push(`${newNote.id}`);
       } catch (error) {
-        toast({
-          description: `Couldn't create a new note. ${error}`,
-          variant: "destructive",
-        });
+        toast.error(`Couldn't create a new note. ${error}`);
       }
     });
   };

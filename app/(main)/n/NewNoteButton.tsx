@@ -2,7 +2,7 @@
 import { createNote } from "@/actions/note-actions";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,6 @@ import { useTransition } from "react";
 
 const NewNoteButton = () => {
   const router = useRouter();
-  const { toast } = useToast();
   const [pending, startTransition] = useTransition();
   const { data, isPending } = useSession();
 
@@ -23,10 +22,7 @@ const NewNoteButton = () => {
         const newNote = await createNote(data.user.id);
         if (newNote) router.push(`${newNote.id}`);
       } catch (error) {
-        toast({
-          description: `Couldn't create a new note. ${error}`,
-          variant: "destructive",
-        });
+        toast.error(`Couldn't create a new note. ${error}`);
       }
     });
   };
@@ -38,7 +34,7 @@ const NewNoteButton = () => {
       onClick={handleClick}
     >
       <Plus />
-      {pending ? "Creating" : "New note"}
+      {pending ? "Creating..." : "New note"}
     </Button>
   );
 };

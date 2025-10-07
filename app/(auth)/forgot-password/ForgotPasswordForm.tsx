@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,19 +16,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { forgetPassword } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import { emailSchema } from "@/lib/zod/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { forgetPassword } from "@/lib/auth-client";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const ForgotPasswordForm = ({
   className,
   ...props
 }: React.ComponentProps<"div">) => {
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof emailSchema>>({
     resolver: zodResolver(emailSchema),
@@ -42,16 +42,10 @@ const ForgotPasswordForm = ({
         email: value.email,
         redirectTo: "/reset-password",
       });
-      if (error)
-        toast({
-          description: `Couldn't send reset link, ${error.message}`,
-          variant: "destructive",
-        });
+      if (error) toast.error(`Couldn't send reset link, ${error.message}`);
       else {
-        toast({
-          title: "Reset link sent.",
+        toast.success("Reset link sent.", {
           description: "Password reset link sent. Please check your email.",
-          variant: "success",
         });
         form.reset();
       }
@@ -88,7 +82,7 @@ const ForgotPasswordForm = ({
                   />
 
                   <Button type="submit" className="w-full" disabled={isPending}>
-                    Send Reset Link
+                    {isPending ? <LoadingSpinner /> : "Send Reset Link"}
                   </Button>
                 </div>
               </form>

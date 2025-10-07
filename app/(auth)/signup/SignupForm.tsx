@@ -18,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
 import { signIn, signUp } from "@/lib/auth-client";
 import providers from "@/lib/providers";
 import { cn } from "@/lib/utils";
@@ -29,11 +28,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const SignupForm = ({ className, ...props }: React.ComponentProps<"div">) => {
   const router = useRouter();
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -55,43 +54,30 @@ const SignupForm = ({ className, ...props }: React.ComponentProps<"div">) => {
         {
           onSuccess: () => {
             form.reset();
-            toast({
-              title: "Verification email sent",
+            toast.success("Verification email sent", {
               description:
                 "A verification email has been sent. Please check your email",
-              variant: "success",
             });
           },
           onError: (ctx: ErrorContext) => {
             switch (ctx.error.status) {
               case 422:
                 form.reset();
-                toast({
-                  title: "Email already exists",
+                toast.error("Email already exists", {
                   description:
                     "Email already exists. Please try again with a different email or log in.",
-                  variant: "destructive",
                 });
                 break;
               case 400:
                 form.reset();
-                toast({
-                  description: "Invalid credentials. Please try again",
-                  variant: "destructive",
-                });
+                toast.error("Invalid credentials. Please try again");
                 break;
               case 429:
-                toast({
-                  description: "Too many requests. Please try again later.",
-                  variant: "destructive",
-                });
+                toast.error("Too many requests. Please try again later.");
                 break;
               default:
                 console.log("Error: ", ctx.error.message);
-                toast({
-                  description: "Could not sign up. Please try again",
-                  variant: "destructive",
-                });
+                toast.error("Could not sign up. Please try again");
             }
           },
         }
@@ -112,10 +98,8 @@ const SignupForm = ({ className, ...props }: React.ComponentProps<"div">) => {
           },
           onError: (ctx: ErrorContext) => {
             console.log("Error: ", ctx.error.message);
-            toast({
-              title: "Couldn't sign in.",
+            toast.error("Couldn't sign in.", {
               description: `Could not sign in with ${provider}, Please try again`,
-              variant: "destructive",
             });
           },
         }

@@ -1,7 +1,6 @@
 "use client";
-import { cn } from "@/lib/utils";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { Button } from "@/components/ui/button";
-import { GalleryVerticalEnd } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -18,15 +17,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
-import { Suspense, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { resetPassword } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import { resetPasswordSchema } from "@/lib/zod/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
-import { resetPassword } from "@/lib/auth-client";
+import { GalleryVerticalEnd } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const ResetPasswordContent = ({
   className,
@@ -34,7 +34,6 @@ const ResetPasswordContent = ({
 }: React.ComponentProps<"div">) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const { toast } = useToast();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") as string;
   const error = searchParams.get("error");
@@ -52,18 +51,14 @@ const ResetPasswordContent = ({
         token,
       });
       if (error)
-        toast({
-          title: "Couldn't reset password",
+        toast.error("Couldn't reset password", {
           description: `${error.message}`,
-          variant: "destructive",
         });
       else {
         router.replace("/login");
-        toast({
-          title: "Password reset successfull",
+        toast.success("Password reset successfull", {
           description:
             "Password has been successfully reset. Please login to continue.",
-          variant: "success",
         });
       }
     });
@@ -128,7 +123,7 @@ const ResetPasswordContent = ({
                 ))}
 
                 <Button type="submit" className="w-full" disabled={isPending}>
-                  Change password
+                  {isPending ? <LoadingSpinner /> : "Change password"}
                 </Button>
               </div>
             </form>

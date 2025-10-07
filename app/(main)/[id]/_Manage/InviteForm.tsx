@@ -1,10 +1,10 @@
 "use client";
 import { inviteUser } from "@/actions/note-actions";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { emailSchema } from "@/lib/zod/authSchema";
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
 
 const InviteForm = ({
   username,
@@ -20,7 +20,6 @@ const InviteForm = ({
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
 
   const handleSubmit = () => {
     const validation = emailSchema.safeParse({ email: input.trim() });
@@ -42,21 +41,13 @@ const InviteForm = ({
       );
       if (success === false) {
         if (error === "This user is already a member") {
-          toast({
-            title: error,
-            variant: "default",
-          });
+          toast(error);
         } else {
-          toast({
-            description: "Couldn't send invitation email.",
-            variant: "destructive",
-          });
+          toast.error("Couldn't send invitation email.");
         }
       } else {
-        toast({
-          title: "Invitation email sent",
+        toast.success("Invitation email sent", {
           description: "An invitation email with the link has been sent",
-          variant: "success",
         });
         setInput("");
       }
@@ -82,7 +73,7 @@ const InviteForm = ({
           className="rounded-xl"
           onClick={handleSubmit}
         >
-          Invite
+          {isPending ? "Inviting..." : "Invite"}
         </Button>
       </div>
     </div>

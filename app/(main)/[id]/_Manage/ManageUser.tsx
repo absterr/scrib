@@ -1,10 +1,10 @@
 "use client";
 import { changeUserRole, removeCollaborator } from "@/actions/note-actions";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { UserRole } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { useTransition } from "react";
-import { UserRole } from "@/lib/utils";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 interface DropdownItem {
   role: UserRole;
@@ -26,17 +26,13 @@ const ManageUser = ({
   role: UserRole;
 }) => {
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
 
   const handleChangeUserRole = (newRole: UserRole) => {
     startTransition(async () => {
       try {
         await changeUserRole(id, noteId, newRole);
       } catch (error) {
-        toast({
-          description: `Couldn't change user priviledges. ${error}`,
-          variant: "destructive",
-        });
+        toast.error(`Couldn't change user priviledges. ${error}`);
       }
     });
   };
@@ -45,11 +41,9 @@ const ManageUser = ({
     startTransition(async () => {
       try {
         await removeCollaborator(id, noteId);
+        toast.success("User removed from note successfully");
       } catch (error) {
-        toast({
-          description: `Couldn't remove user. ${error}`,
-          variant: "destructive",
-        });
+        toast.error(`Couldn't remove user, ${error}`);
       }
     });
   };
@@ -71,7 +65,9 @@ const ManageUser = ({
         </DropdownMenuItem>
       ))}
       <hr />
-      <DropdownMenuItem onClick={handleRemoveUser}>Remove</DropdownMenuItem>
+      <DropdownMenuItem onClick={handleRemoveUser} disabled={isPending}>
+        {isPending ? "Removing..." : "Remove"}
+      </DropdownMenuItem>
     </>
   );
 };
