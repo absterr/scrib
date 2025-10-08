@@ -34,6 +34,8 @@ export const config = {
     "/n",
     "/chat",
     "/invite/:id*",
+    "/account",
+    "/billing",
     "/pricing",
   ],
 };

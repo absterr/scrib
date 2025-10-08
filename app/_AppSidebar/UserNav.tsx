@@ -15,16 +15,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  Sparkles,
-} from "lucide-react";
-import LogoutButton from "./LogoutButton";
-import { useSession } from "@/lib/auth-client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useSession } from "@/lib/auth-client";
+import { Bell, ChevronsUpDown, CreditCard, Sparkles, User } from "lucide-react";
+import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 const UserNav = () => {
   const { isMobile } = useSidebar();
@@ -32,6 +27,8 @@ const UserNav = () => {
 
   if (isPending) return <Skeleton className="w-full h-16 rounded-xl" />;
   if (!data || !data.user) return null;
+
+  // TODO: SHOW "Upgrade to pro" IF USER IS IN FREE TIER
 
   return (
     <SidebarMenu>
@@ -89,14 +86,18 @@ const UserNav = () => {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
+              <Link href={"/account"}>
+                <DropdownMenuItem>
+                  <User />
+                  Account
+                </DropdownMenuItem>
+              </Link>
+              <Link href={"/billing"}>
+                <DropdownMenuItem>
+                  <CreditCard />
+                  Billing
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>
                 <Bell />
                 Notifications
