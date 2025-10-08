@@ -18,3 +18,7 @@ export const updateUserName = async (userId: string, newName: string) => {
     return { success: false, message: "An unexpected error occured" };
   }
 };
+
+export const deleteUser = async (userId: string) => {
+  await db.delete(user).where(eq(user.id, userId));
+};

@@ -9,29 +9,29 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Trash2 } from "lucide-react";
-import DeleteNoteButton from "./DeleteNoteButton";
+import DeleteAccountButton from "./DeleteAccountButton";
 
-const DeleteNoteDialog = ({ noteId }: { noteId: string }) => (
+const DeleteAccountDialog = ({ userId }: { userId: string }) => (
   <Dialog>
-    <DialogTrigger className="p-2 rounded-sm text-white bg-neutral-300 hover:text-red-400 hover:bg-neutral-300 transition-colors duration-100">
-      <Trash2 className="w-4 h-4" />
+    <DialogTrigger className="text-red-600 font-semibold hover:underline">
+      Delete
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Confirm delete</DialogTitle>
         <DialogDescription>
-          This will delete the note and all associated data
+          Deleting your account is permanent and irreversible. You will loose
+          all your notes, collaborations and subscriptions.
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
         <DialogClose asChild>
           <Button variant="outline">Cancel</Button>
         </DialogClose>
-        <DeleteNoteButton noteId={noteId} />
+        <DeleteAccountButton userId={userId} />
       </DialogFooter>
     </DialogContent>
   </Dialog>
 );
 
-export default DeleteNoteDialog;
+export default DeleteAccountDialog;

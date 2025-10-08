@@ -6,10 +6,10 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
-import React, { useState, useTransition } from "react";
-import { FormDetails } from "./formDetails";
 import { emailSchema, nameSchema } from "@/lib/zod/authSchema";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
+import { FormDetails } from "./formDetails";
 
 const DetailsForm = ({
   formDetails,

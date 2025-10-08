@@ -4,7 +4,6 @@ import { db } from "@/db/drizzle";
 import {
   note,
   noteCollaborator,
-  noteEmbedding,
   noteInvite,
   noteVersion,
 } from "@/db/schema/note-schema";
@@ -128,8 +127,6 @@ export const removeCollaborator = async (noteId: string, userId: string) => {
 };
 
 export const deleteNote = async (noteId: string) => {
-  await db.delete(noteCollaborator).where(eq(noteCollaborator.noteId, noteId));
-  await db.delete(noteEmbedding).where(eq(noteEmbedding.noteId, noteId));
   await db.delete(note).where(eq(note.id, noteId));
   revalidatePath("/n");
   revalidatePath("/");

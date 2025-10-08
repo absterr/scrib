@@ -3,8 +3,9 @@ import { auth } from "@/lib/auth";
 import { changeEmail } from "@/lib/auth-client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { FormDetails } from "./formDetails";
+import DeleteAccountDialog from "./_DeleteAccountDialog/DeleteAccountDialog";
 import DetailsForm from "./DetailsForm";
+import { FormDetails } from "./formDetails";
 
 const AccountPage = async () => {
   const session = await auth.api.getSession({
@@ -34,7 +35,7 @@ const AccountPage = async () => {
   ];
 
   return (
-    <section className="max-w-3xl mx-auto pt-20 flex flex-col gap-16">
+    <section className="max-w-3xl mx-auto pt-20 flex flex-col gap-18">
       <div className="flex flex-col gap-6">
         <h2 className="font-semibold text-2xl">Personal details</h2>
         <div className="flex flex-col gap-6">
@@ -45,6 +46,19 @@ const AccountPage = async () => {
               key={detail.title}
             />
           ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-6">
+        <h2 className="font-semibold text-2xl">Manage account</h2>
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-semibold text-lg">Delete account</h3>
+            <p className="text-neutral-700">
+              Permanently delete your scrib account
+            </p>
+          </div>
+          <DeleteAccountDialog userId={userId} />
         </div>
       </div>
     </section>

@@ -1,28 +1,29 @@
 "use client";
-import { deleteNote } from "@/actions/note-actions";
+import { deleteUser } from "@/actions/user-actions";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import { toast } from "sonner";
 
-const DeleteNoteButton = ({ noteId }: { noteId: string }) => {
+const DeleteAccountButton = ({ userId }: { userId: string }) => {
   const [isPending, startTransition] = useTransition();
 
   const handleClick = () => {
     startTransition(async () => {
       try {
-        await deleteNote(noteId);
-        toast.success("Note successfully deleted.");
+        await deleteUser(userId);
+        toast.success("Account successfully deleted.");
       } catch (error) {
-        toast.error(`Couldn't delete note. ${error}`);
+        toast.error(`Couldn't delete account. ${error}`);
       }
     });
   };
 
   return (
     <Button onClick={handleClick} disabled={isPending} variant="destructive">
-      {isPending ? "Deleting..." : "Delete"}
+      {isPending ? <LoadingSpinner /> : "Delete"}
     </Button>
   );
 };
 
-export default DeleteNoteButton;
+export default DeleteAccountButton;
