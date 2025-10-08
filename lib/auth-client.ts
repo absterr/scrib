@@ -6,4 +6,5 @@ export const {
   forgetPassword,
   resetPassword,
   useSession,
+  changeEmail,
 } = createAuthClient();

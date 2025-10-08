@@ -1,4 +1,5 @@
 import sendMail from "@/actions/email";
+import ChangeEmail from "@/components/email/ChangeEmail";
 import EmailVerification from "@/components/email/EmailVerification";
 import PasswordReset from "@/components/email/PasswordReset";
 import { db } from "@/db/drizzle";
@@ -49,6 +50,26 @@ export const auth = betterAuth({
       enabled: true,
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    },
+  },
+  user: {
+    changeEmail: {
+      enabled: true,
+      sendChangeEmailVerification: async ({ user, newEmail, url }) => {
+        const verificationUrl = url + "email-verified";
+
+        await sendMail({
+          to: user.email,
+          subject: "Email change requested",
+          template: await render(ChangeEmail(newEmail)),
+        });
+
+        await sendMail({
+          to: newEmail,
+          subject: "Approve email change",
+          template: await render(EmailVerification(verificationUrl)),
+        });
+      },
     },
   },
 } satisfies BetterAuthOptions);

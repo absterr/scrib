@@ -26,9 +26,12 @@ export const createNote = async (ownerId: string) => {
     .insert(note)
     .values({ ownerId })
     .returning({ id: removeUUIDHyphens });
-  await db
-    .insert(noteCollaborator)
-    .values({ noteId: newNote.id, userId: ownerId, role: "owner" });
+
+  if (newNote) {
+    await db
+      .insert(noteCollaborator)
+      .values({ noteId: newNote.id, userId: ownerId, role: "owner" });
+  }
 
   return newNote;
 };
