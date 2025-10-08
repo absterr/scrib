@@ -33,6 +33,10 @@ export const loginSchema = object({
   password: getPasswordSchema(),
 });
 
+export const nameSchema = object({
+  name: getNameSchema(),
+});
+
 export const emailSchema = object({
   email: getEmailSchema(),
 });

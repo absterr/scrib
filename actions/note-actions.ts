@@ -132,4 +132,5 @@ export const deleteNote = async (noteId: string) => {
   await db.delete(noteEmbedding).where(eq(noteEmbedding.noteId, noteId));
   await db.delete(note).where(eq(note.id, noteId));
   revalidatePath("/n");
+  revalidatePath("/");
 };
