@@ -1,4 +1,4 @@
-import Footer from "../../Footer";
+import Footer from "@/components/Footer";
 import ActionButtons from "./ActionButtons";
 
 const LandingPage = () => (

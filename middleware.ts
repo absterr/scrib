@@ -1,5 +1,5 @@
+import { getCookieCache, getSessionCookie } from "better-auth/cookies";
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionCookie } from "better-auth/cookies";
 
 const authRoutes = new Set([
   "/login",
@@ -9,7 +9,7 @@ const authRoutes = new Set([
 ]);
 const leadRoutes = new Set(["/", "/pricing"]);
 
-export async function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const pathname = request.nextUrl.pathname;
   const isAuthRoute = authRoutes.has(pathname);
@@ -30,6 +30,7 @@ export const config = {
     "/signup",
     "/forgot-password",
     "/reset-password",
+    "/email-verified",
     "/",
     "/n",
     "/chat",

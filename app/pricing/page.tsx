@@ -1,4 +1,4 @@
-import Footer from "../Footer";
+import Footer from "@/components/Footer";
 import FAQ from "./FAQ";
 import PricingToggle from "./_PricingToggle";
 import { pricingFAQs } from "./details";

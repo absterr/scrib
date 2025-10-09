@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import AppSidebar from "../_AppSidebar";
 import CustomTrigger from "../CustomTrigger";
-import Navbar from "../Navbar";
+import Navbar from "@/components/Navbar";
 
 export default async function HomeLayout({
   children,
