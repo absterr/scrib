@@ -8,14 +8,7 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
 } from "@/components/ui/sidebar";
-import {
-  Bot,
-  Calendar,
-  Home,
-  Layout,
-  NotebookTabs,
-  Settings,
-} from "lucide-react";
+import { Bot, Calendar, Home, Layout, NotebookTabs } from "lucide-react";
 import SidebarClientButton from "./SidebarClientButton";
 import UserNav from "./UserNav";
 
@@ -45,11 +38,6 @@ const menuItems = [
     title: "Templates",
     url: "#",
     icon: <Layout />,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: <Settings />,
   },
 ];
 

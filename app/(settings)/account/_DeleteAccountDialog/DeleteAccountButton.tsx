@@ -2,6 +2,7 @@
 import { deleteUser } from "@/actions/user-actions";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 
@@ -12,7 +13,7 @@ const DeleteAccountButton = ({ userId }: { userId: string }) => {
     startTransition(async () => {
       try {
         await deleteUser(userId);
-        toast.success("Account successfully deleted.");
+        redirect("/");
       } catch (error) {
         toast.error(`Couldn't delete account. ${error}`);
       }
