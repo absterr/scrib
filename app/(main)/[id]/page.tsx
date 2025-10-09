@@ -13,7 +13,7 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const { id } = await params;
   // CHECK IF id IS A VALID UUID
-  if (!/^[0-9a-fA-F-]{36}$/.test(id)) notFound();
+  if (!/^[0-9a-fA-F]{36}$/.test(id)) notFound();
 
   const foundNote = await checkNote(id);
   if (!foundNote) notFound();
