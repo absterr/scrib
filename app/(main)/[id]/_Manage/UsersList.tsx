@@ -2,28 +2,24 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { UserRole } from "@/lib/utils";
+import { User, UserRole } from "@/lib/utils";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import ManageUser from "./ManageUser";
 
 const UsersList = ({
-  id,
-  name,
-  email,
-  role,
+  user,
   noteId,
   currentUserId,
   currentUserRole,
 }: {
-  id: string;
-  name: string;
-  email: string;
-  role: UserRole;
+  user: User;
   noteId: string;
   currentUserId: string;
   currentUserRole: UserRole;
 }) => {
+  const { id, name, email, role } = user;
+
   return (
     <div className="flex justify-between gap-2 px-3 mx-1 py-1 mb-1 rounded-xl hover:bg-neutral-100 transition-colors duration-150">
       <div className="flex flex-col">

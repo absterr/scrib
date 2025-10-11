@@ -110,8 +110,8 @@ export const changeUserRole = async (
 
 // DELETE
 
-export const removeInvite = async (userEmail: string) => {
-  await db.delete(noteInvite).where(eq(noteInvite.receiverEmail, userEmail));
+export const removeInvite = async (userToken: string) => {
+  await db.delete(noteInvite).where(eq(noteInvite.token, userToken));
 };
 
 export const removeCollaborator = async (noteId: string, userId: string) => {

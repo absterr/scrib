@@ -18,11 +18,9 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const foundNote = await checkNote(id);
   if (!foundNote) notFound();
 
-  const userId = session.user.id;
-  const username = session.user.name;
-  const userEmail = session.user.email;
+  const currentUserId = session.user.id;
 
-  const { role } = await checkCollaborator(userId, id);
+  const { role } = await checkCollaborator(currentUserId, id);
   if (!role)
     return (
       <div className="py-24 mx-auto px-4 text-center">
@@ -31,6 +29,13 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         </h2>
       </div>
     );
+
+  const currentUserDetails = {
+    id: currentUserId,
+    name: session.user.name,
+    email: session.user.email,
+    role: role,
+  };
 
   const collaborators = await getCollaborators(id);
 
@@ -41,10 +46,7 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           noteId={id}
           noteTitle={foundNote.title}
           users={collaborators}
-          currentUserId={userId}
-          currentUsername={username}
-          currentUserEmail={userEmail}
-          currentUserRole={role}
+          currentUserDetails={currentUserDetails}
         />
       </div>
       <div className="max-w-5xl py-24 mx-auto px-4">

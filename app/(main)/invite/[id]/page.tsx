@@ -1,7 +1,7 @@
 import { addCollaborator, removeInvite } from "@/actions/note-actions";
+import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { checkCollaborator, checkNote, checkUserToken } from "@/lib/queries";
-import { Button } from "@/components/ui/button";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -20,8 +20,11 @@ const InvitePage = async ({ params, searchParams }: Props) => {
   const { id } = await params;
   const userToken = (await searchParams).token;
 
+  // CHECK IF id AND userToken ARE VALID
+  if (!/^[0-9a-fA-F]{32}$/.test(id) || !userToken) notFound();
+
   const foundNote = await checkNote(id);
-  if (!foundNote || !userToken) notFound();
+  if (!foundNote) notFound();
 
   const token = await checkUserToken(userToken);
   if (!token) {
@@ -53,7 +56,7 @@ const InvitePage = async ({ params, searchParams }: Props) => {
   }
 
   await addCollaborator(id, userId);
-  await removeInvite(userEmail);
+  await removeInvite(token);
 
   return (
     <div className="py-24 mx-auto px-4 text-center flex flex-col gap-6 items-center">

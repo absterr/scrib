@@ -3,6 +3,13 @@ import { twMerge } from "tailwind-merge";
 
 export type UserRole = "owner" | "admin" | "editor";
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

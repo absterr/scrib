@@ -1,68 +1,56 @@
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { User } from "@/lib/utils";
 import InviteForm from "./InviteForm";
-import { Button } from "@/components/ui/button";
 import UsersList from "./UsersList";
-import { UserRole } from "@/lib/utils";
-
-interface Props {
-  id: string;
-  name: string;
-  email: string;
-  role: UserRole;
-}
 
 const Manage = ({
   noteId,
   noteTitle,
   users,
-  currentUserId,
-  currentUsername,
-  currentUserEmail,
-  currentUserRole,
+  currentUserDetails,
 }: {
   noteId: string;
   noteTitle: string;
-  users: Props[];
-  currentUserId: string;
-  currentUsername: string;
-  currentUserEmail: string;
-  currentUserRole: UserRole;
-}) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="outline" className="px-2 py-3 shadow-none">
-        Users
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="rounded-2xl">
-      {(currentUserRole === "owner" || "admin") && (
-        <InviteForm
-          username={currentUsername}
-          userEmail={currentUserEmail}
-          noteId={noteId}
-          noteTitle={noteTitle}
-        />
-      )}
-      <div>
-        {users.map((user) => (
-          <UsersList
-            id={user.id}
-            name={user.name}
-            email={user.email}
-            role={user.role}
+  users: User[];
+  currentUserDetails: User;
+}) => {
+  const { id, name, email, role } = currentUserDetails;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="px-2 py-3 shadow-none">
+          Users
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="rounded-2xl">
+        {(role === "owner" || "admin") && (
+          <InviteForm
+            username={name}
+            userEmail={email}
             noteId={noteId}
-            currentUserId={currentUserId}
-            currentUserRole={currentUserRole}
-            key={user.email}
+            noteTitle={noteTitle}
           />
-        ))}
-      </div>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+        )}
+        <div>
+          {users.map((user) => (
+            <UsersList
+              user={user}
+              noteId={noteId}
+              currentUserId={id}
+              currentUserRole={role}
+              key={user.email}
+            />
+          ))}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 export default Manage;

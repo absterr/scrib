@@ -1,4 +1,4 @@
-import { getCookieCache, getSessionCookie } from "better-auth/cookies";
+import { getSessionCookie } from "better-auth/cookies";
 import { NextRequest, NextResponse } from "next/server";
 
 const authRoutes = new Set([
