@@ -63,7 +63,7 @@ const InviteForm = ({
           placeholder="Email"
           value={input}
           className={cn(
-            "rounded-xl border-2 px-3 py-1 w-86 focus:outline-none",
+            "rounded-xl border-2 px-3 py-1 w-full md:w-82 focus:outline-none",
             { "border-neutral-500": !error, "border-red-500": error }
           )}
           onChange={(e) => setInput(e.target.value)}

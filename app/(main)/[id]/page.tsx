@@ -41,7 +41,7 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <section>
-      <div className="fixed top-2 right-6 z-50 text-sm">
+      <div className="fixed top-2 right-3 z-50 text-sm">
         <Manage
           noteId={id}
           noteTitle={foundNote.title}

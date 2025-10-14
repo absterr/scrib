@@ -71,5 +71,16 @@ export const auth = betterAuth({
         });
       },
     },
+    additionalFields: {
+      plan: {
+        type: "string",
+        defaultValue: "hobby",
+        required: true,
+      },
+      stripeCustomerId: { type: "string", required: false },
+      stripeSubscriptionId: { type: "string", required: false },
+      subscriptionStatus: { type: "string", required: false },
+      subscriptionExpiresAt: { type: "date", required: false },
+    },
   },
 } satisfies BetterAuthOptions);

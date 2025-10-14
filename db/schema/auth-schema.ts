@@ -1,4 +1,18 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
+
+const userPlanEnum = pgEnum("user_plan", ["hobby", "pro"]);
+
+// ?: SHOULD SUBSCRIPTION STATUS CONSTRAINT BE SET(VALUES FROM STRIPE)
+// const subscriptionStatusEnum = pgEnum("subscription_status", [
+//   "active",
+//   "canceled",
+//   "incomplete",
+//   "incomplete_expired",
+//   "past_due",
+//   "paused",
+//   "trailing",
+//   "unpaid",
+// ]);
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -6,6 +20,11 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
+  plan: userPlanEnum("plan").default("hobby").notNull(),
+  stripeCustomerId: text("stripe_customer_id"),
+  stripeSubscriptionId: text("stripe_subscription_id"),
+  subscriptionStatus: text("subscription_status"),
+  subscriptionExpiresAt: timestamp("subscription_expires_at"),
   createdAt: timestamp("created_at")
     .$defaultFn(() => new Date())
     .notNull(),
