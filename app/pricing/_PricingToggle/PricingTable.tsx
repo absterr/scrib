@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Fragment } from "react";
-import { Info } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Info } from "lucide-react";
+import { Fragment } from "react";
 import { type Detail, TableSection } from "../details";
 
 const PlanHeader = ({

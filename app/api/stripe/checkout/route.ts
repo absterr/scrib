@@ -1,17 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Stripe } from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST(req: NextRequest) {
   const {
     email,
-    priceId,
+    interval,
     userId,
-  }: { email: string; priceId: string; userId: string } = await req.json();
-  if (!email || !priceId || !userId) {
+  }: { email: string; interval: "month" | "year"; userId: string } =
+    await req.json();
+  if (!email || !interval || !userId) {
     return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
   }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const priceId =
+    interval === "month"
+      ? process.env.SCRIB_PRO_MONTHLY_ID!
+      : process.env.SCRIB_PRO_YEARLY_ID!;
 
   try {
     // CREATE OR REUSE STRIPE CUSTOMER
@@ -24,17 +29,15 @@ export async function POST(req: NextRequest) {
       mode: "subscription",
       customer: customer.id,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${process.env.BETTER_AUTH_URL}/billing?success=true`,
-      cancel_url: `${process.env.BETTER_AUTH_URL}/billing?cancel=true`,
-      subscription_data: {
-        metadata: { userId },
-      },
+      success_url: `${process.env.BETTER_AUTH_URL}/billing?action=checkout&status=success`,
+      cancel_url: `${process.env.BETTER_AUTH_URL}/billing?action=checkout&status=cancel`,
+      metadata: { userId },
     });
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
     return NextResponse.json(
-      { error: "An unexpected error occured." },
+      { error: `An unexpected error occured: ${error}` },
       { status: 500 }
     );
   }

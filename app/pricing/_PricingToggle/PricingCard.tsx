@@ -15,7 +15,7 @@ const PricingCard = ({
 }: Props) => (
   <div
     key={name}
-    className={cn("flex flex-col gap-6 p-4 border rounded-3xl max-w-sm", {
+    className={cn("flex flex-col gap-6 p-4 border rounded-3xl max-w-xs", {
       "bg-neutral-100": name === "Pro",
     })}
   >

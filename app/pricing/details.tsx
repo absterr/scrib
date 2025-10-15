@@ -59,7 +59,7 @@ export const cardDetails: CardDetail[] = [
       "Up to 5 notes",
       "5 collaborators per note",
     ],
-    extra: "Scrib AI trial",
+    extra: "Unavailable",
   },
   {
     ...(details.find((d) => d.name === "Pro") as Detail),
@@ -69,7 +69,7 @@ export const cardDetails: CardDetail[] = [
       "Up to 50 notes",
       "50 collaborators per note",
     ],
-    extra: "Scrib AI full access",
+    extra: "Scrib AI",
   },
 ];
 

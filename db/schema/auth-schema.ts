@@ -1,6 +1,10 @@
 import { pgTable, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
 
-const userPlanEnum = pgEnum("user_plan", ["hobby", "pro"]);
+const userPlanEnum = pgEnum("user_plan", [
+  "Hobby",
+  "Pro monthly",
+  "Pro yearly",
+]);
 
 // ?: SHOULD SUBSCRIPTION STATUS CONSTRAINT BE SET(VALUES FROM STRIPE)
 // const subscriptionStatusEnum = pgEnum("subscription_status", [
@@ -20,7 +24,7 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
-  plan: userPlanEnum("plan").default("hobby").notNull(),
+  plan: userPlanEnum("plan").default("Hobby").notNull(),
   stripeCustomerId: text("stripe_customer_id"),
   stripeSubscriptionId: text("stripe_subscription_id"),
   subscriptionStatus: text("subscription_status"),

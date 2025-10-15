@@ -1,4 +1,6 @@
+import { inferAdditionalFields } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
+
 export const {
   signUp,
   signIn,
@@ -7,4 +9,24 @@ export const {
   resetPassword,
   useSession,
   changeEmail,
-} = createAuthClient();
+} = createAuthClient({
+  plugins: [
+    inferAdditionalFields({
+      user: {
+        plan: {
+          type: ["Hobby", "Pro monthly", "Pro yearly"] as const,
+          required: true,
+          defaultValue: "Hobby",
+        },
+        stripeSubscriptionId: {
+          type: "string",
+          required: false,
+        },
+        subscriptionStatus: {
+          type: "string",
+          required: false,
+        },
+      },
+    }),
+  ],
+});

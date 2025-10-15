@@ -73,8 +73,8 @@ export const auth = betterAuth({
     },
     additionalFields: {
       plan: {
-        type: "string",
-        defaultValue: "hobby",
+        type: ["Hobby", "Pro monthly", "Pro yearly"] as const,
+        defaultValue: "Hobby",
         required: true,
       },
       stripeCustomerId: { type: "string", required: false },

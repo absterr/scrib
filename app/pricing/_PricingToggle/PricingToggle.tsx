@@ -1,9 +1,9 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { cardDetails, details, tableSections } from "../details";
 import PricingCard from "./PricingCard";
 import PricingTable from "./PricingTable";
-import { cardDetails, details, tableSections } from "../details";
 
 const PricingToggle = () => {
   const [bill, setBill] = useState<"Monthly" | "Yearly">("Monthly");
@@ -42,7 +42,7 @@ const PricingToggle = () => {
         subscription
       </p>
 
-      <div className="flex gap-6 pb-24">
+      <div className="flex gap-8 pb-24">
         {cardDetails.map((detail) => (
           <PricingCard key={detail.name} cardDetail={detail} bill={bill} />
         ))}
