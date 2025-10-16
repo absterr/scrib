@@ -66,8 +66,8 @@ export const cardDetails: CardDetail[] = [
     description: "For professionals and teams looking to work together",
     features: [
       "Real-time editing and collaboration",
-      "Up to 50 notes",
-      "50 collaborators per note",
+      "Up to 20 notes",
+      "20 collaborators per note",
     ],
     extra: "Scrib AI",
   },
@@ -78,19 +78,19 @@ export const tableSections: TableSection[] = [
     title: "Features",
     rows: [
       { label: "Real-time editing", hobby: <Check />, pro: <Check /> },
-      { label: "Notes", hobby: "Up to 5", pro: "Up to 50" },
+      { label: "Notes", hobby: "Up to 5", pro: "Up to 20" },
     ],
   },
   {
     title: "Collaboration",
     rows: [
       { label: "Real-time collaboration", hobby: <Check />, pro: <Check /> },
-      { label: "Collaborators", hobby: "Up to 5", pro: "Up to 50" },
+      { label: "Collaborators", hobby: "Up to 5", pro: "Up to 20" },
     ],
   },
   {
     title: "Other",
-    rows: [{ label: "Scrib AI", hobby: "Trial", pro: "Full access" }],
+    rows: [{ label: "Scrib AI", hobby: "Not available", pro: "Full access" }],
   },
 ];
 

@@ -15,6 +15,7 @@ import { formatDate } from "@/lib/utils";
 const CustomTable = ({
   notes,
   userId,
+  maxNotesReached,
 }: {
   notes: {
     id: string;
@@ -24,6 +25,7 @@ const CustomTable = ({
     updatedAt: Date;
   }[];
   userId: string;
+  maxNotesReached: boolean;
 }) => (
   <Table>
     <TableCaption>
@@ -70,7 +72,7 @@ const CustomTable = ({
       })}
       <TableRow>
         <TableCell colSpan={5}>
-          <NewNoteButton />
+          <NewNoteButton userId={userId} maxNotesReached={maxNotesReached} />
         </TableCell>
       </TableRow>
     </TableBody>

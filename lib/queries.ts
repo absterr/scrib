@@ -2,7 +2,7 @@ import "server-only";
 import { db } from "@/db/drizzle";
 import { user } from "@/db/schema/auth-schema";
 import { note, noteCollaborator, noteInvite } from "@/db/schema/note-schema";
-import { and, desc, eq, sql } from "drizzle-orm";
+import { and, count, desc, eq, sql } from "drizzle-orm";
 
 const removeUUIDHyphens = sql<string>`REPLACE(${note.id}::text, '-', '')`.as(
   "id"
@@ -110,6 +110,24 @@ export const getUserCollaborationsNotes = async (userId: string) => {
     .orderBy(desc(note.updatedAt));
 
   return collaborationNotes;
+};
+
+export const getUserCollaborationsCount = async (noteId: string) => {
+  const [collaboratorsCount] = await db
+    .select({ count: count() })
+    .from(noteCollaborator)
+    .where(eq(noteCollaborator.noteId, noteId));
+
+  return collaboratorsCount;
+};
+
+export const getUserOwnedNotesCount = async (userId: string) => {
+  const [noteCount] = await db
+    .select({ count: count() })
+    .from(note)
+    .where(eq(note.ownerId, userId));
+
+  return noteCount;
 };
 
 export const getUserRecentNotes = async (userId: string) => {

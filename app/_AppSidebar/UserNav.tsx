@@ -28,8 +28,6 @@ const UserNav = () => {
   if (isPending) return <Skeleton className="w-full h-16 rounded-xl" />;
   if (!data || !data.user) return null;
 
-  // TODO: SHOW "Upgrade to pro" IF USER IS IN FREE TIER
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>

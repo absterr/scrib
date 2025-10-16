@@ -13,13 +13,17 @@ import NewNoteCard from "./NewNoteCard";
 
 const CustomCarousel = ({
   notes,
+  userId,
+  maxNotesReached,
 }: {
   notes: { id: string; title: string; updatedAt: Date }[];
+  userId: string;
+  maxNotesReached: boolean;
 }) => (
   <Carousel>
     <CarouselContent>
       <CarouselItem className="basis-1/5 pl-4">
-        <NewNoteCard />
+        <NewNoteCard userId={userId} maxNotesReached={maxNotesReached} />
       </CarouselItem>
       {notes.map((note) => (
         <CarouselItem className="basis-1/5 pl-4" key={note.id}>

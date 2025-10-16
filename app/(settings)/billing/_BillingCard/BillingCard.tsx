@@ -18,8 +18,6 @@ const BillingCard = ({
 }) => {
   const { name, price, interval, description } = plan;
 
-  // TODO: OFFER THE OPTION TO CANCEL/DOWNGRADE
-
   return (
     <Card className="w-full rounded-3xl shadow-none">
       <div className="flex justify-between items-center">

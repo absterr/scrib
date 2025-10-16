@@ -1,25 +1,26 @@
 "use client";
 import { createNote } from "@/actions/note-actions";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { toast } from "sonner";
-import { useSession } from "@/lib/auth-client";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { toast } from "sonner";
 
-const NewNoteButton = () => {
+const NewNoteButton = ({
+  userId,
+  maxNotesReached,
+}: {
+  userId: string;
+  maxNotesReached: boolean;
+}) => {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
-  const { data, isPending } = useSession();
-
-  if (isPending) return <Skeleton className="h-8 w-24" />;
-  if (!data || !data.user) return null;
 
   const handleClick = () => {
+    if (maxNotesReached) return;
     startTransition(async () => {
       try {
-        const newNote = await createNote(data.user.id);
+        const newNote = await createNote(userId);
         if (newNote) router.push(`${newNote.id}`);
       } catch (error) {
         toast.error(`Couldn't create a new note. ${error}`);

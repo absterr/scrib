@@ -1,9 +1,10 @@
 import { auth } from "@/lib/auth";
-import { getUserRecentNotes } from "@/lib/queries";
+import { getUserOwnedNotesCount, getUserRecentNotes } from "@/lib/queries";
 import { getFirstName } from "@/lib/utils";
 import { headers } from "next/headers";
 import CustomCarousel from "./_CustomCarousel";
 import LandingPage from "./_LandingPage";
+import { PLAN_LIMITS } from "@/lib/planLimits";
 
 const HomePage = async () => {
   const session = await auth.api.getSession({
@@ -14,8 +15,13 @@ const HomePage = async () => {
   const userInfo = {
     id: session.user.id,
     name: session.user.name,
+    plan: session.user.plan,
   };
+
   const userRecentNotes = await getUserRecentNotes(userInfo.id);
+  const userLimit = PLAN_LIMITS[userInfo.plan];
+  const { count } = await getUserOwnedNotesCount(userInfo.id);
+  const maxNotesReached = count >= userLimit.maxNotes;
 
   return (
     <section className="max-w-4xl py-8 mx-auto px-4">
@@ -26,7 +32,11 @@ const HomePage = async () => {
       <div>
         <h2 className="font-light text-lg mb-4">Recent notes</h2>
         <div>
-          <CustomCarousel notes={userRecentNotes} />
+          <CustomCarousel
+            notes={userRecentNotes}
+            userId={userInfo.id}
+            maxNotesReached={maxNotesReached}
+          />
         </div>
       </div>
     </section>
