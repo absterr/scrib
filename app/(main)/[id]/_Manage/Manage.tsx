@@ -13,11 +13,13 @@ const Manage = ({
   noteTitle,
   users,
   currentUserDetails,
+  maxCollaboratorsReached,
 }: {
   noteId: string;
   noteTitle: string;
   users: User[];
   currentUserDetails: User;
+  maxCollaboratorsReached: boolean;
 }) => {
   const { id, name, email, role } = currentUserDetails;
 
@@ -35,6 +37,7 @@ const Manage = ({
             userEmail={email}
             noteId={noteId}
             noteTitle={noteTitle}
+            maxCollaboratorsReached={maxCollaboratorsReached}
           />
         )}
         <div>

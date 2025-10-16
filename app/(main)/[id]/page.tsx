@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import Editor from "./_Editor";
 import Manage from "./_Manage";
+import { PLAN_LIMITS } from "@/lib/planLimits";
 
 const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const session = await auth.api.getSession({
@@ -37,7 +38,12 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
     role: role,
   };
 
+  const userPlan = session.user.plan;
   const collaborators = await getCollaborators(id);
+  const collaboratorsCount = collaborators.length;
+  const userLimit = PLAN_LIMITS[userPlan];
+  const maxCollaboratorsReached =
+    collaboratorsCount >= userLimit.maxCollaborators;
 
   return (
     <section>
@@ -47,6 +53,7 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           noteTitle={foundNote.title}
           users={collaborators}
           currentUserDetails={currentUserDetails}
+          maxCollaboratorsReached={maxCollaboratorsReached}
         />
       </div>
       <div className="max-w-5xl py-24 mx-auto px-4">

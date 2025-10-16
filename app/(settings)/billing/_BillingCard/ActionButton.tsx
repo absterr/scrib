@@ -2,26 +2,24 @@
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useSession } from "@/lib/auth-client";
+import { UserSubscriptionInfo } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 
-const ActionButton = ({ interval }: { interval: string }) => {
-  const [pending, startTransition] = useTransition();
-  const { data, isPending } = useSession();
+const ActionButton = ({
+  interval,
+  userInfo,
+}: {
+  interval: string;
+  userInfo: UserSubscriptionInfo;
+}) => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  if (isPending) return <Skeleton className="h-10 w-18 rounded-3xl" />;
-  if (!data || !data.user) return null;
 
-  const userId = data.user.id;
-  const email = data.user.email;
-  const currentPlan = data.user.plan;
-  const subscriptionId = data.user.stripeSubscriptionId;
-  const subscriptionStatus = data.user.subscriptionStatus;
+  const { userId, email, currentPlan, subscriptionId, subscriptionStatus } =
+    userInfo;
 
-  // TODO: SET UP PLAN/PRICE IN STRIPE DASHBOARD
   const handleSelectPlan = () => {
     startTransition(async () => {
       try {
@@ -71,20 +69,21 @@ const ActionButton = ({ interval }: { interval: string }) => {
       <Button
         className="rounded-3xl py-5"
         variant={"destructive"}
+        disabled={isPending}
         onClick={handleCancelPlan}
       >
-        {pending ? <LoadingSpinner /> : "Cancel"}
+        {isPending ? <LoadingSpinner /> : "Cancel"}
       </Button>
     );
   }
 
   return (
     <Button
-      disabled={pending}
       className="rounded-3xl py-5"
+      disabled={isPending}
       onClick={handleSelectPlan}
     >
-      {pending ? <LoadingSpinner /> : "Upgrade"}
+      {isPending ? <LoadingSpinner /> : "Upgrade"}
     </Button>
   );
 };

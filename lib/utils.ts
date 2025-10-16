@@ -4,6 +4,14 @@ import { twMerge } from "tailwind-merge";
 export type UserRole = "owner" | "admin" | "editor";
 export type UserPlan = "Hobby" | "Pro monthly" | "Pro yearly";
 
+export type UserSubscriptionInfo = {
+  userId: string;
+  email: string;
+  currentPlan: UserPlan;
+  subscriptionId: string | null | undefined;
+  subscriptionStatus: string | null | undefined;
+};
+
 export interface User {
   id: string;
   name: string;

@@ -11,17 +11,20 @@ const InviteForm = ({
   userEmail,
   noteId,
   noteTitle,
+  maxCollaboratorsReached,
 }: {
   username: string;
   userEmail: string;
   noteId: string;
   noteTitle: string;
+  maxCollaboratorsReached: boolean;
 }) => {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = () => {
+    if (maxCollaboratorsReached) return;
     const validation = emailSchema.safeParse({ email: input.trim() });
     if (!validation.success) {
       setError(validation.error.issues[0].message);

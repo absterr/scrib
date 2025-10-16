@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { UserSubscriptionInfo } from "@/lib/utils";
 import ActionButton from "./ActionButton";
-import { UserPlan } from "@/lib/utils";
 
 interface Plan {
   name: string;
@@ -11,10 +11,10 @@ interface Plan {
 
 const BillingCard = ({
   plan,
-  currentPlan,
+  userInfo,
 }: {
   plan: Plan;
-  currentPlan: UserPlan;
+  userInfo: UserSubscriptionInfo;
 }) => {
   const { name, price, interval, description } = plan;
 
@@ -30,11 +30,11 @@ const BillingCard = ({
           <p className="text-neutral-600">
             {interval === "month" ? "Billed monthly" : "Billed annually"}
             <br />
-            {currentPlan === "Hobby" && description}
+            {userInfo.currentPlan === "Hobby" && description}
           </p>
         </CardHeader>
         <CardContent>
-          <ActionButton interval={interval} />
+          <ActionButton interval={interval} userInfo={userInfo} />
         </CardContent>
       </div>
     </Card>

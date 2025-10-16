@@ -112,15 +112,6 @@ export const getUserCollaborationsNotes = async (userId: string) => {
   return collaborationNotes;
 };
 
-export const getUserCollaborationsCount = async (noteId: string) => {
-  const [collaboratorsCount] = await db
-    .select({ count: count() })
-    .from(noteCollaborator)
-    .where(eq(noteCollaborator.noteId, noteId));
-
-  return collaboratorsCount;
-};
-
 export const getUserOwnedNotesCount = async (userId: string) => {
   const [noteCount] = await db
     .select({ count: count() })
