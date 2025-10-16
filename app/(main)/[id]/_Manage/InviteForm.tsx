@@ -1,5 +1,6 @@
 "use client";
 import { inviteUser } from "@/actions/note-actions";
+import LimitDialog from "@/components/LimitDialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { emailSchema } from "@/lib/zod/authSchema";
@@ -71,13 +72,21 @@ const InviteForm = ({
           )}
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button
-          disabled={isPending || input === ""}
-          className="rounded-xl"
-          onClick={handleSubmit}
-        >
-          {isPending ? "Inviting..." : "Invite"}
-        </Button>
+        {maxCollaboratorsReached ? (
+          <LimitDialog>
+            <Button disabled={input === ""} className="rounded-xl">
+              Invite
+            </Button>
+          </LimitDialog>
+        ) : (
+          <Button
+            disabled={isPending || input === ""}
+            className="rounded-xl"
+            onClick={handleSubmit}
+          >
+            {isPending ? "Inviting..." : "Invite"}
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { createNote } from "@/actions/note-actions";
+import LimitDialog from "@/components/LimitDialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { NotebookPen } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -28,7 +29,19 @@ const NewNoteCard = ({
     });
   };
 
-  return (
+  return maxNotesReached ? (
+    <LimitDialog>
+      <button className="cursor-pointer">
+        <Card className="shadow-none hover:shadow-sm transition-shadow h-32 w-38 text-neutral-600">
+          <CardContent>
+            <NotebookPen />
+            <hr className="mt-2 mb-1" />
+            <h3 className="text-sm font-semibold text-left">New note</h3>
+          </CardContent>
+        </Card>
+      </button>
+    </LimitDialog>
+  ) : (
     <button
       disabled={isPending}
       onClick={handleClick}

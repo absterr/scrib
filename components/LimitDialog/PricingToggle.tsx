@@ -1,8 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { cardDetails } from "../../../pricing/details";
-import PricingCard from "./PricingCard";
+import { cardDetails } from "@/lib/details";
+import PricingCard from "../PricingCard";
 
 const PricingToggle = () => {
   const [bill, setBill] = useState<"Monthly" | "Yearly">("Monthly");

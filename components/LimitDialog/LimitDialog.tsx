@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   Dialog,
   DialogContent,
@@ -6,15 +6,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../ui/dialog";
 import PricingToggle from "./PricingToggle";
-import Link from "next/link";
 
-const LimitDialogButton = () => (
+const LimitDialog = ({ children }: { children: React.ReactNode }) => (
   <Dialog>
-    <DialogTrigger asChild>
-      <Button className="bg-neutral-300 hover:bg-neutral-500">Create</Button>
-    </DialogTrigger>
+    <DialogTrigger asChild>{children}</DialogTrigger>
     <DialogContent>
       <div className="flex flex-col items-center px-10 py-6">
         <DialogHeader>
@@ -38,4 +35,4 @@ const LimitDialogButton = () => (
   </Dialog>
 );
 
-export default LimitDialogButton;
+export default LimitDialog;

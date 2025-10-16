@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
-import { type CardDetail } from "../details";
+import { type CardDetail } from "@/lib/details";
 
 interface Props {
   cardDetail: CardDetail;

@@ -1,8 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { cardDetails, details, tableSections } from "../details";
-import PricingCard from "./PricingCard";
+import { cardDetails, details, tableSections } from "@/lib/details";
+import PricingCard from "@/components/PricingCard";
 import PricingTable from "./PricingTable";
 
 const PricingToggle = () => {
