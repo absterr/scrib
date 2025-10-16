@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
 import { Fragment } from "react";
 import { type Detail, TableSection } from "@/lib/details";
+import Link from "next/link";
 
 const PlanHeader = ({
   detail,
@@ -28,9 +29,14 @@ const PlanHeader = ({
                 } per mo`}
           </span>
         </h3>
-        <Button className="px-4 py-5 w-fit rounded-3xl" variant={variant}>
-          {button}
-        </Button>
+        <Link href={name === "Pro" ? "/billing" : "/"}>
+          <Button
+            className="px-4 py-5 w-fit rounded-3xl cursor-pointer"
+            variant={variant}
+          >
+            {button}
+          </Button>
+        </Link>
       </div>
     </th>
   );

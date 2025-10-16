@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { type CardDetail } from "@/lib/details";
+import Link from "next/link";
 
 interface Props {
   cardDetail: CardDetail;
@@ -48,12 +49,14 @@ const PricingCard = ({
       <p>{description}</p>
     </div>
     <div>
-      <Button
-        className="w-full rounded-3xl py-6"
-        variant={name === "Pro" ? "outline" : "default"}
-      >
-        {name === "Pro" ? "Get started" : "Join for free"}
-      </Button>
+      <Link href={name === "Pro" ? "/billing" : "/"}>
+        <Button
+          className="w-full rounded-3xl py-6 cursor-pointer"
+          variant={name === "Pro" ? "outline" : "default"}
+        >
+          {name === "Pro" ? "Get started" : "Join for free"}
+        </Button>
+      </Link>
     </div>
     <div className="text-left">
       <ul className="text-neutral-500 space-y-2">
