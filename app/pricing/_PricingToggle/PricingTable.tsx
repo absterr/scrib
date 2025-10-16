@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Info } from "lucide-react";
 import { Fragment } from "react";
-import { type Detail, TableSection } from "../details";
+import { type Detail, TableSection } from "@/lib/details";
 
 const PlanHeader = ({
   detail,
