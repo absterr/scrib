@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { truncateTitle } from "@/lib/utils";
+import { truncateTitle, UserPlan } from "@/lib/utils";
 import { NotebookText } from "lucide-react";
 import Link from "next/link";
 import NewNoteCard from "./NewNoteCard";
@@ -14,16 +14,22 @@ import NewNoteCard from "./NewNoteCard";
 const CustomCarousel = ({
   notes,
   userId,
+  userPlan,
   maxNotesReached,
 }: {
   notes: { id: string; title: string; updatedAt: Date }[];
   userId: string;
+  userPlan: UserPlan;
   maxNotesReached: boolean;
 }) => (
   <Carousel>
     <CarouselContent>
       <CarouselItem className="basis-1/5 pl-4">
-        <NewNoteCard userId={userId} maxNotesReached={maxNotesReached} />
+        <NewNoteCard
+          userId={userId}
+          userPlan={userPlan}
+          maxNotesReached={maxNotesReached}
+        />
       </CarouselItem>
       {notes.map((note) => (
         <CarouselItem className="basis-1/5 pl-4" key={note.id}>

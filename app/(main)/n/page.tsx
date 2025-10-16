@@ -32,6 +32,7 @@ const NoteListPage = async () => {
         <CustomTable
           notes={notes}
           userId={userInfo.id}
+          userPlan={userInfo.plan}
           maxNotesReached={maxNotesReached}
         />
       ) : (
@@ -41,6 +42,7 @@ const NoteListPage = async () => {
           </p>
           <NewNoteButton
             userId={userInfo.id}
+            userPlan={userInfo.plan}
             maxNotesReached={maxNotesReached}
           />
         </div>

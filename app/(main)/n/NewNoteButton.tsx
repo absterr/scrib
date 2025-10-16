@@ -2,6 +2,7 @@
 import { createNote } from "@/actions/note-actions";
 import LimitDialog from "@/components/LimitDialog";
 import { Button } from "@/components/ui/button";
+import { UserPlan } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
@@ -9,9 +10,11 @@ import { toast } from "sonner";
 
 const NewNoteButton = ({
   userId,
+  userPlan,
   maxNotesReached,
 }: {
   userId: string;
+  userPlan: UserPlan;
   maxNotesReached: boolean;
 }) => {
   const router = useRouter();
@@ -30,7 +33,7 @@ const NewNoteButton = ({
   };
 
   return maxNotesReached ? (
-    <LimitDialog>
+    <LimitDialog userPlan={userPlan}>
       <Button className="bg-neutral-300 hover:bg-neutral-500">New note</Button>
     </LimitDialog>
   ) : (

@@ -10,11 +10,12 @@ import {
 import Link from "next/link";
 import DeleteNoteDialog from "./DeleteNoteDialog";
 import NewNoteButton from "../NewNoteButton";
-import { formatDate } from "@/lib/utils";
+import { formatDate, UserPlan } from "@/lib/utils";
 
 const CustomTable = ({
   notes,
   userId,
+  userPlan,
   maxNotesReached,
 }: {
   notes: {
@@ -25,6 +26,7 @@ const CustomTable = ({
     updatedAt: Date;
   }[];
   userId: string;
+  userPlan: UserPlan;
   maxNotesReached: boolean;
 }) => (
   <Table>
@@ -72,7 +74,11 @@ const CustomTable = ({
       })}
       <TableRow>
         <TableCell colSpan={5}>
-          <NewNoteButton userId={userId} maxNotesReached={maxNotesReached} />
+          <NewNoteButton
+            userId={userId}
+            userPlan={userPlan}
+            maxNotesReached={maxNotesReached}
+          />
         </TableCell>
       </TableRow>
     </TableBody>

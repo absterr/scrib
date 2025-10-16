@@ -2,24 +2,28 @@
 import { inviteUser } from "@/actions/note-actions";
 import LimitDialog from "@/components/LimitDialog";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, UserPlan } from "@/lib/utils";
 import { emailSchema } from "@/lib/zod/authSchema";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
-const InviteForm = ({
-  username,
-  userEmail,
-  noteId,
-  noteTitle,
-  maxCollaboratorsReached,
-}: {
+interface Props {
   username: string;
   userEmail: string;
+  userPlan: UserPlan;
   noteId: string;
   noteTitle: string;
   maxCollaboratorsReached: boolean;
-}) => {
+}
+
+const InviteForm = ({
+  username,
+  userEmail,
+  userPlan,
+  noteId,
+  noteTitle,
+  maxCollaboratorsReached,
+}: Props) => {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -73,7 +77,7 @@ const InviteForm = ({
           onChange={(e) => setInput(e.target.value)}
         />
         {maxCollaboratorsReached ? (
-          <LimitDialog>
+          <LimitDialog userPlan={userPlan}>
             <Button disabled={input === ""} className="rounded-xl">
               Invite
             </Button>

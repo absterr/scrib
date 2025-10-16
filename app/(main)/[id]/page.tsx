@@ -31,16 +31,22 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
     );
 
-  const currentUserDetails = {
+  const currentUserInfo = {
     id: currentUserId,
     name: session.user.name,
     email: session.user.email,
     role: role,
   };
 
-  const userPlan = session.user.plan;
+  const noteDetails = {
+    noteId: id,
+    noteTitle: foundNote.title,
+  };
+
   const collaborators = await getCollaborators(id);
   const collaboratorsCount = collaborators.length;
+
+  const userPlan = session.user.plan;
   const userLimit = PLAN_LIMITS[userPlan];
   const maxCollaboratorsReached =
     collaboratorsCount >= userLimit.maxCollaborators;
@@ -49,10 +55,10 @@ const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
     <section>
       <div className="fixed top-2 right-3 z-50 text-sm">
         <Manage
-          noteId={id}
-          noteTitle={foundNote.title}
+          noteDetails={noteDetails}
           users={collaborators}
-          currentUserDetails={currentUserDetails}
+          currentUserInfo={currentUserInfo}
+          userPlan={userPlan}
           maxCollaboratorsReached={maxCollaboratorsReached}
         />
       </div>

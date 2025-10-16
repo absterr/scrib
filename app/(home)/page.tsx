@@ -35,6 +35,7 @@ const HomePage = async () => {
           <CustomCarousel
             notes={userRecentNotes}
             userId={userInfo.id}
+            userPlan={userInfo.plan}
             maxNotesReached={maxNotesReached}
           />
         </div>

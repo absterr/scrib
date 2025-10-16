@@ -4,24 +4,30 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User } from "@/lib/utils";
+import { User, UserPlan } from "@/lib/utils";
 import InviteForm from "./InviteForm";
 import UsersList from "./UsersList";
 
-const Manage = ({
-  noteId,
-  noteTitle,
-  users,
-  currentUserDetails,
-  maxCollaboratorsReached,
-}: {
-  noteId: string;
-  noteTitle: string;
+interface Props {
+  noteDetails: {
+    noteId: string;
+    noteTitle: string;
+  };
   users: User[];
-  currentUserDetails: User;
+  currentUserInfo: User;
+  userPlan: UserPlan;
   maxCollaboratorsReached: boolean;
-}) => {
-  const { id, name, email, role } = currentUserDetails;
+}
+
+const Manage = ({
+  noteDetails,
+  users,
+  currentUserInfo,
+  userPlan,
+  maxCollaboratorsReached,
+}: Props) => {
+  const { id, name, email, role } = currentUserInfo;
+  const { noteId, noteTitle } = noteDetails;
 
   return (
     <DropdownMenu>
@@ -35,6 +41,7 @@ const Manage = ({
           <InviteForm
             username={name}
             userEmail={email}
+            userPlan={userPlan}
             noteId={noteId}
             noteTitle={noteTitle}
             maxCollaboratorsReached={maxCollaboratorsReached}
