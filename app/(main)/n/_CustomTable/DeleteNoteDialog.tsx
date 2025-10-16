@@ -14,7 +14,7 @@ import DeleteNoteButton from "./DeleteNoteButton";
 
 const DeleteNoteDialog = ({ noteId }: { noteId: string }) => (
   <Dialog>
-    <DialogTrigger className="p-2 rounded-sm text-white bg-neutral-300 hover:text-red-400 hover:bg-neutral-300 transition-colors duration-100">
+    <DialogTrigger className="p-2 rounded-sm text-white bg-neutral-300 hover:text-red-500 hover:bg-neutral-300 transition-colors duration-100">
       <Trash2 className="w-4 h-4" />
     </DialogTrigger>
     <DialogContent>

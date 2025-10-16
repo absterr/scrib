@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
+import LimitDialogButton from "./_LimitDialogButton";
 
 const NewNoteButton = ({
   userId,
@@ -28,7 +29,7 @@ const NewNoteButton = ({
     });
   };
 
-  return (
+  return maxNotesReached ? (
     <Button
       disabled={pending}
       className="bg-neutral-300 hover:bg-neutral-500"
@@ -37,6 +38,8 @@ const NewNoteButton = ({
       <Plus />
       {pending ? "Creating..." : "New note"}
     </Button>
+  ) : (
+    <LimitDialogButton />
   );
 };
 

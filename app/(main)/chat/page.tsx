@@ -8,6 +8,7 @@ const ChatPage = async () => {
     headers: await headers(),
   });
   if (!session || !session.user) redirect("/login");
+  if (session.user.plan === "Hobby") redirect("/billing");
 
   return (
     <section className="max-w-3xl mx-auto">
