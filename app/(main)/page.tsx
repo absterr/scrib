@@ -12,9 +12,9 @@ const HomePage = async () => {
   });
   if (!session || !session.user) return <LandingPage />;
 
+  const username = session.user.name;
   const userInfo = {
     id: session.user.id,
-    name: session.user.name,
     plan: session.user.plan,
   };
 
@@ -26,7 +26,7 @@ const HomePage = async () => {
   return (
     <section className="max-w-4xl py-8 mx-auto px-4">
       <header className="mb-12 flex justify-center">
-        <h1>Hello, {getFirstName(userInfo.name)}</h1>
+        <h1>Hello, {getFirstName(username)}</h1>
       </header>
 
       <div>
@@ -34,8 +34,7 @@ const HomePage = async () => {
         <div>
           <CustomCarousel
             notes={userRecentNotes}
-            userId={userInfo.id}
-            userPlan={userInfo.plan}
+            userInfo={userInfo}
             maxNotesReached={maxNotesReached}
           />
         </div>

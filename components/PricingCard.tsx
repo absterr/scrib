@@ -49,7 +49,7 @@ const PricingCard = ({
       <p>{description}</p>
     </div>
     <div>
-      <Link href={name === "Pro" ? "/billing" : "/"}>
+      <Link href={name === "Pro" ? "/billing" : "/signup"}>
         <Button
           className="w-full rounded-3xl py-6 cursor-pointer"
           variant={name === "Pro" ? "outline" : "default"}

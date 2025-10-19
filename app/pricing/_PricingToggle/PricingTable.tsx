@@ -29,7 +29,7 @@ const PlanHeader = ({
                 } per mo`}
           </span>
         </h3>
-        <Link href={name === "Pro" ? "/billing" : "/"}>
+        <Link href={name === "Pro" ? "/billing" : "/signup"}>
           <Button
             className="px-4 py-5 w-fit rounded-3xl cursor-pointer"
             variant={variant}

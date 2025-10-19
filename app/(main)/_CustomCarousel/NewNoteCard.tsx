@@ -9,22 +9,24 @@ import { useTransition } from "react";
 import { toast } from "sonner";
 
 const NewNoteCard = ({
-  userId,
-  userPlan,
+  userInfo,
   maxNotesReached,
 }: {
-  userId: string;
-  userPlan: UserPlan;
+  userInfo: {
+    id: string;
+    plan: UserPlan;
+  };
   maxNotesReached: boolean;
 }) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const { id, plan } = userInfo;
 
   const handleClick = () => {
     if (maxNotesReached) return;
     startTransition(async () => {
       try {
-        const newNote = await createNote(userId);
+        const newNote = await createNote(id);
         if (newNote) router.push(`${newNote.id}`);
       } catch (error) {
         toast.error(`Couldn't create a new note. ${error}`);
@@ -33,7 +35,7 @@ const NewNoteCard = ({
   };
 
   return maxNotesReached ? (
-    <LimitDialog userPlan={userPlan}>
+    <LimitDialog userPlan={plan}>
       <button className="cursor-pointer">
         <Card className="shadow-none hover:shadow-sm transition-shadow h-32 w-38 text-neutral-600">
           <CardContent>

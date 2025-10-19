@@ -1,4 +1,5 @@
 "use client";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/lib/auth-client";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -31,14 +32,14 @@ const LogoutButton = () => {
   };
 
   return (
-    <button
+    <DropdownMenuItem
       onClick={handleLogout}
       disabled={isPending}
       className="flex items-center gap-2"
     >
       <LogOut />
       Log out
-    </button>
+    </DropdownMenuItem>
   );
 };
 

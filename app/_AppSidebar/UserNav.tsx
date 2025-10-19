@@ -15,18 +15,23 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useSession } from "@/lib/auth-client";
+import { UserPlan } from "@/lib/utils";
 import { Bell, ChevronsUpDown, CreditCard, Sparkles, User } from "lucide-react";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 
-const UserNav = () => {
+const UserNav = ({
+  userInfo,
+}: {
+  userInfo: {
+    name: string;
+    email: string;
+    image: string | null | undefined;
+    plan: UserPlan;
+  };
+}) => {
   const { isMobile } = useSidebar();
-  const { data, isPending } = useSession();
-
-  if (isPending) return <Skeleton className="w-full h-16 rounded-xl" />;
-  if (!data || !data.user) return null;
+  const { name, email, image, plan } = userInfo;
 
   return (
     <SidebarMenu>
@@ -41,15 +46,12 @@ const UserNav = () => {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage
-                  src={data.user.image ?? data.user.name}
-                  alt={data.user.name}
-                />
+                <AvatarImage src={image ?? name} alt={name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{data.user.name}</span>
-                <span className="truncate text-xs">{data.user.email}</span>
+                <span className="truncate font-medium">{name}</span>
+                <span className="truncate text-xs">{email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -63,19 +65,16 @@ const UserNav = () => {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage
-                    src={data.user.image ?? data.user.name}
-                    alt={data.user.name}
-                  />
+                  <AvatarImage src={image ?? name} alt={name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{data.user.name}</span>
-                  <span className="truncate text-xs">{data.user.email}</span>
+                  <span className="truncate font-medium">{name}</span>
+                  <span className="truncate text-xs">{email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
-            {data.user.plan === "Hobby" && (
+            {plan === "Hobby" && (
               <>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
@@ -106,9 +105,7 @@ const UserNav = () => {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogoutButton />
-            </DropdownMenuItem>
+            <LogoutButton />
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

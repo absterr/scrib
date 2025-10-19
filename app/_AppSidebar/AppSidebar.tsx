@@ -11,8 +11,8 @@ import {
 import { Bot, Calendar, Home, Layout, NotebookTabs } from "lucide-react";
 import SidebarClientButton from "./SidebarClientButton";
 import UserNav from "./UserNav";
+import { type UserPlan } from "@/lib/utils";
 
-// TODO: Get this data from the session or fetch from DB
 const menuItems = [
   {
     title: "Home",
@@ -41,7 +41,16 @@ const menuItems = [
   },
 ];
 
-const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+interface SidebarProps extends React.ComponentProps<typeof Sidebar> {
+  userInfo: {
+    name: string;
+    email: string;
+    image: string | null | undefined;
+    plan: UserPlan;
+  };
+}
+
+const AppSidebar = ({ userInfo, ...props }: SidebarProps) => {
   return (
     <Sidebar className="text-black" {...props}>
       <SidebarContent>
@@ -59,7 +68,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <UserNav />
+        <UserNav userInfo={userInfo} />
       </SidebarFooter>
     </Sidebar>
   );
