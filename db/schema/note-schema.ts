@@ -33,7 +33,7 @@ const bytea = customType<{
   },
 });
 
-const userRoleEnum = pgEnum("user_role", ["owner", "admin", "editor"]);
+const userRoleEnum = pgEnum("user_role", ["Owner", "Admin", "Editor"]);
 
 export const note = pgTable("note", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -95,12 +95,15 @@ export const noteCollaborator = pgTable(
     primaryKey({ columns: [table.noteId, table.userId] }),
     uniqueIndex("unique_note_owner")
       .on(table.noteId)
-      .where(sql`${table.role} = 'owner'`),
+      .where(sql`${table.role} = 'Owner'`),
   ]
 );
 
 export const noteInvite = pgTable("note_invite", {
   id: uuid("id").primaryKey().defaultRandom(),
+  noteId: uuid("note_id")
+    .notNull()
+    .references(() => note.id, { onDelete: "cascade" }),
   receiverEmail: text("receiver_email").notNull(),
   senderEmail: text("sender_email").notNull(),
   token: varchar("token", { length: 64 })

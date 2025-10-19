@@ -29,7 +29,7 @@ export const createNote = async (ownerId: string) => {
   if (newNote) {
     await db
       .insert(noteCollaborator)
-      .values({ noteId: newNote.id, userId: ownerId, role: "owner" });
+      .values({ noteId: newNote.id, userId: ownerId, role: "Owner" });
   }
 
   return newNote;
@@ -67,7 +67,7 @@ export const inviteUser = async (
 
   const [{ token }] = await db
     .insert(noteInvite)
-    .values({ receiverEmail, senderEmail })
+    .values({ noteId, receiverEmail, senderEmail })
     .returning({ token: noteInvite.token });
 
   if (token) {
@@ -85,7 +85,7 @@ export const inviteUser = async (
 };
 
 export const addCollaborator = async (noteId: string, userId: string) => {
-  await db.insert(noteCollaborator).values({ noteId, userId, role: "editor" });
+  await db.insert(noteCollaborator).values({ noteId, userId, role: "Editor" });
   revalidatePath(`/${noteId}`);
 };
 

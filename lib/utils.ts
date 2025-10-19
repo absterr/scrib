@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export type UserRole = "owner" | "admin" | "editor";
+export type UserRole = "Owner" | "Admin" | "Editor";
 export type UserPlan = "Hobby" | "Pro monthly" | "Pro yearly";
 
 export type UserSubscriptionInfo = {

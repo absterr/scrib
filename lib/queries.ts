@@ -59,11 +59,11 @@ export const checkNote = async (noteId: string) => {
   return foundNote;
 };
 
-export const checkUserToken = async (userToken: string) => {
+export const checkUserToken = async (noteId: string, userToken: string) => {
   const [{ token }] = await db
     .select({ token: noteInvite.token })
     .from(noteInvite)
-    .where(eq(noteInvite.token, userToken))
+    .where(and(eq(noteInvite.noteId, noteId), eq(noteInvite.token, userToken)))
     .limit(1);
 
   return token;

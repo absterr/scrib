@@ -12,8 +12,8 @@ interface DropdownItem {
 }
 
 const dropdownItems: DropdownItem[] = [
-  { role: "admin", description: "Can edit note and manage users" },
-  { role: "editor", description: "Can edit note" },
+  { role: "Admin", description: "Can edit note and manage users" },
+  { role: "Editor", description: "Can edit note" },
 ];
 
 const ManageUser = ({

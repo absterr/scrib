@@ -8,18 +8,18 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
 interface Props {
-  username: string;
-  userEmail: string;
-  userPlan: UserPlan;
+  userInfo: {
+    name: string;
+    email: string;
+    plan: UserPlan;
+  };
   noteId: string;
   noteTitle: string;
   maxCollaboratorsReached: boolean;
 }
 
 const InviteForm = ({
-  username,
-  userEmail,
-  userPlan,
+  userInfo,
   noteId,
   noteTitle,
   maxCollaboratorsReached,
@@ -27,6 +27,7 @@ const InviteForm = ({
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const { name, email, plan } = userInfo;
 
   const handleSubmit = () => {
     if (maxCollaboratorsReached) return;
@@ -41,8 +42,8 @@ const InviteForm = ({
 
     startTransition(async () => {
       const { success, error } = await inviteUser(
-        username,
-        userEmail,
+        name,
+        email,
         receiverEmail,
         noteId,
         noteTitle
@@ -77,7 +78,7 @@ const InviteForm = ({
           onChange={(e) => setInput(e.target.value)}
         />
         {maxCollaboratorsReached ? (
-          <LimitDialog userPlan={userPlan}>
+          <LimitDialog userPlan={plan}>
             <Button disabled={input === ""} className="rounded-xl">
               Invite
             </Button>

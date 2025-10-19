@@ -37,11 +37,9 @@ const Manage = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="rounded-2xl">
-        {(role === "owner" || "admin") && (
+        {(role === "Owner" || "Admin") && (
           <InviteForm
-            username={name}
-            userEmail={email}
-            userPlan={userPlan}
+            userInfo={{ name, email, plan: userPlan }}
             noteId={noteId}
             noteTitle={noteTitle}
             maxCollaboratorsReached={maxCollaboratorsReached}

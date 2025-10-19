@@ -32,7 +32,7 @@ const UsersList = ({
         <p className="font-light text-xs text-neutral-600">{email}</p>
       </div>
       <div className="flex items-center">
-        {currentUserRole === "editor" || role === "owner" ? (
+        {currentUserRole === "Editor" || role === "Owner" ? (
           <p className="text-neutral-600 px-1">{role}</p>
         ) : (
           <DropdownMenu>

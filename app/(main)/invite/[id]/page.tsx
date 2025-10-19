@@ -26,7 +26,7 @@ const InvitePage = async ({ params, searchParams }: Props) => {
   const foundNote = await checkNote(id);
   if (!foundNote) notFound();
 
-  const token = await checkUserToken(userToken);
+  const token = await checkUserToken(id, userToken);
   if (!token) {
     return (
       <div className="py-24 mx-auto px-4 text-center">
