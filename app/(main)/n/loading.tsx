@@ -9,28 +9,28 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const SkeletonRow = () => (
-  <TableRow>
+const SkeletonRow = ({ className }: { className?: string }) => (
+  <TableRow className={`${className}`}>
     <TableCell>
-      <Skeleton className="w-92 h-4" />
+      <Skeleton className="w-64 md:w-72 lg:w-92 h-4" />
     </TableCell>
-    <TableCell>
+    <TableCell className="px-8 lg:px-0">
       <Skeleton className="w-12 h-5" />
     </TableCell>
-    <TableCell>
+    <TableCell className="px-8 lg:px-0">
       <Skeleton className="w-24 h-5" />
     </TableCell>
-    <TableCell>
+    <TableCell className="px-8 lg:px-0">
       <Skeleton className="w-28 h-5" />
     </TableCell>
-    <TableCell>
+    <TableCell className="px-8 lg:px-0">
       <Skeleton className="w-10 h-10" />
     </TableCell>
   </TableRow>
 );
 
 const NoteListLoading = () => (
-  <div className="max-w-7xl py-8 mx-auto px-4">
+  <div className="max-w-7xl py-8 mx-auto px-6">
     <div className="mb-8">
       <Skeleton className="h-10 w-56" />
     </div>
@@ -56,9 +56,11 @@ const NoteListLoading = () => (
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <SkeletonRow key={index} />
-        ))}
+        <SkeletonRow />
+        <SkeletonRow />
+        <SkeletonRow />
+        <SkeletonRow className="hidden md:block" />
+        <SkeletonRow className="hidden lg:block" />
         <TableRow>
           <TableCell>
             <Skeleton className="w-26 h-8" />
