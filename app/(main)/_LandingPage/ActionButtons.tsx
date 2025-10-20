@@ -4,13 +4,13 @@ import Link from "next/link";
 const ActionButtons = () => (
   <div className="flex gap-4 justify-center pt-8">
     <Link href={"/signup"}>
-      <Button className="rounded-3xl text-base border border-black py-6">
+      <Button className="rounded-3xl md:text-base py-5 md:py-6 border border-black">
         Get started
       </Button>
     </Link>
     <Link href={"/pricing"}>
       <Button
-        className="rounded-3xl text-base py-6 border bg-white border-neutral-400 shadow-none"
+        className="rounded-3xl md:text-base py-5 md:py-6 border bg-white border-neutral-400 shadow-none"
         variant={"secondary"}
       >
         See our plans

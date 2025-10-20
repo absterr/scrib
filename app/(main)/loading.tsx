@@ -12,7 +12,7 @@ const CardSkeleton = () => (
 );
 
 const HomeLoading = () => (
-  <div className="min-h-screen max-w-4xl py-8 mx-auto px-4">
+  <div className="min-h-screen max-w-xs md:max-w-xl lg:max-w-4xl py-8 px-4 mx-auto">
     <div className="pb-28 flex items-center justify-center">
       <Skeleton className="h-10 w-82" />
     </div>

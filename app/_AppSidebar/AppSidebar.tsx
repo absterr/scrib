@@ -8,10 +8,10 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
 } from "@/components/ui/sidebar";
+import { type UserPlan } from "@/lib/utils";
 import { Bot, Calendar, Home, Layout, NotebookTabs } from "lucide-react";
 import SidebarClientButton from "./SidebarClientButton";
 import UserNav from "./UserNav";
-import { type UserPlan } from "@/lib/utils";
 
 const menuItems = [
   {
@@ -56,7 +56,7 @@ const AppSidebar = ({ userInfo, ...props }: SidebarProps) => {
       <SidebarContent>
         <SidebarGroup className="space-y-4">
           <SidebarGroupLabel>
-            <h2 className="font-semibold text-lg">Scrib</h2>
+            <h2 className="font-semibold text-lg italic">Scrib</h2>
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="space-y-3">

@@ -18,7 +18,7 @@ const ChatWrapper = () => {
       {hasMessages ? (
         <Messages messages={messages} />
       ) : (
-        <h2 className="font-semibold text-3xl mb-8 text-center">
+        <h2 className="font-semibold text-xl md:text-2xl lg:text-3xl pb-4 lg:pb-8 text-center">
           What can I help you with?
         </h2>
       )}

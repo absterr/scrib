@@ -23,15 +23,24 @@ const CustomCarousel = ({
   };
   maxNotesReached: boolean;
 }) => (
-  <Carousel>
+  <Carousel
+    opts={{
+      align: "start",
+      dragFree: true,
+    }}
+    className="w-full overflow-visible lg:overflow-hidden md:pl-3 lg:pl-0"
+  >
     <CarouselContent>
-      <CarouselItem className="basis-1/5 pl-4">
+      <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/5 pl-4">
         <NewNoteCard maxNotesReached={maxNotesReached} userInfo={userInfo} />
       </CarouselItem>
       {notes.map((note) => (
-        <CarouselItem className="basis-1/5 pl-4" key={note.id}>
+        <CarouselItem
+          className="basis-1/2 md:basis-1/3 lg:basis-1/5 pl-4"
+          key={note.id}
+        >
           <Link href={note.id}>
-            <Card className="shadow-none hover:shadow-sm transition-shadow h-32 w-38 text-neutral-800">
+            <Card className="shadow-none hover:shadow-sm transition-shadow h-30 w-34 md:h-32 md:w-38 text-neutral-800">
               <CardContent>
                 <NotebookText />
                 <hr className="mt-2 mb-1" />

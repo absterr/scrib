@@ -11,7 +11,7 @@ const ChatPage = async () => {
   if (session.user.plan === "Hobby") redirect("/billing");
 
   return (
-    <section className="max-w-3xl mx-auto">
+    <section className="max-w-xs md:max-w-lg lg:max-w-3xl mx-auto px-2">
       <ChatWrapper />
     </section>
   );

@@ -37,18 +37,18 @@ const PricingToggle = () => {
         ))}
       </fieldset>
 
-      <p className="pb-6 font-semibold text-neutral-400">
+      <p className="pb-6 font-semibold text-neutral-400 text-sm lg:text-base">
         <span className="text-neutral-700">Save 16%</span> on a yearly
         subscription
       </p>
 
-      <div className="flex gap-8 pb-24">
+      <div className="flex flex-col md:flex-row gap-8 pb-24">
         {cardDetails.map((detail) => (
           <PricingCard key={detail.name} cardDetail={detail} bill={bill} />
         ))}
       </div>
 
-      <div className="py-36">
+      <div className="py-36 hidden lg:block">
         <PricingTable
           details={details}
           bill={bill}

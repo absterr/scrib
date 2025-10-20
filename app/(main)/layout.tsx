@@ -1,11 +1,11 @@
+import Navbar from "@/components/Navbar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import AppSidebar from "../_AppSidebar";
 import CustomTrigger from "../CustomTrigger";
-import Navbar from "@/components/Navbar";
 
-export default async function HomeLayout({
+export default async function MainLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await auth.api.getSession({
@@ -30,7 +30,7 @@ export default async function HomeLayout({
   };
 
   return (
-    <div className="flex">
+    <div className="flex overflow-hidden w-full h-full">
       <SidebarProvider>
         <AppSidebar userInfo={userInfo} />
         <div className="flex-1">

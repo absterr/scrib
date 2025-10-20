@@ -24,13 +24,15 @@ const HomePage = async () => {
   const maxNotesReached = count >= userLimit.maxNotes;
 
   return (
-    <section className="max-w-4xl py-8 mx-auto px-4">
+    <section className="max-w-xs md:max-w-xl lg:max-w-4xl py-8 mx-auto px-4">
       <header className="mb-12 flex justify-center">
         <h1>Hello, {getFirstName(username)}</h1>
       </header>
 
       <div>
-        <h2 className="font-light text-lg mb-4">Recent notes</h2>
+        <h2 className="font-light text-lg mb-4 md:pl-3 lg:pl-0">
+          Recent notes
+        </h2>
         <div>
           <CustomCarousel
             notes={userRecentNotes}

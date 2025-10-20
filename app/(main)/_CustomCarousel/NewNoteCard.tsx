@@ -37,7 +37,7 @@ const NewNoteCard = ({
   return maxNotesReached ? (
     <LimitDialog userPlan={plan}>
       <button className="cursor-pointer">
-        <Card className="shadow-none hover:shadow-sm transition-shadow h-32 w-38 text-neutral-600">
+        <Card className="shadow-none hover:shadow-sm transition-shadow h-30 w-34 md:h-32 md:w-38 text-neutral-600">
           <CardContent>
             <NotebookPen />
             <hr className="mt-2 mb-1" />
@@ -52,12 +52,12 @@ const NewNoteCard = ({
       onClick={handleClick}
       className="cursor-pointer"
     >
-      <Card className="shadow-none hover:shadow-sm transition-shadow h-32 w-38 text-neutral-600">
+      <Card className="shadow-none hover:shadow-sm transition-shadow h-30 w-34 md:h-32 md:w-38 text-neutral-600">
         <CardContent>
           <NotebookPen />
           <hr className="mt-2 mb-1" />
           <h3 className="text-sm font-semibold text-left">
-            {isPending ? "Creating" : "New note"}
+            {isPending ? "Creating..." : "New note"}
           </h3>
         </CardContent>
       </Card>

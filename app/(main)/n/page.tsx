@@ -26,7 +26,7 @@ const NoteListPage = async () => {
   const maxNotesReached = count >= userLimit.maxNotes;
 
   return (
-    <section className="max-w-7xl py-8 mx-auto px-4">
+    <section className="max-w-xs md:max-w-2xl lg:max-w-7xl py-8 px-6 mx-auto">
       <h1>Notes</h1>
       {notes.length !== 0 ? (
         <CustomTable

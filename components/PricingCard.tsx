@@ -16,9 +16,12 @@ const PricingCard = ({
 }: Props) => (
   <div
     key={name}
-    className={cn("flex flex-col gap-6 p-4 border rounded-3xl max-w-xs", {
-      "bg-neutral-100": name === "Pro",
-    })}
+    className={cn(
+      "flex flex-col gap-6 p-4 border rounded-3xl max-w-2xs md:max-w-xs",
+      {
+        "bg-neutral-100": name === "Pro",
+      }
+    )}
   >
     <div className="text-left space-y-2">
       <h3 className="text-2xl font-bold">{name}</h3>

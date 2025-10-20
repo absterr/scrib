@@ -24,7 +24,7 @@ const footerLinks = [
 ];
 
 const Footer = () => (
-  <footer className="bg-foreground text-background w-full py-12 px-4 min-h-[calc(40vh)]">
+  <footer className="bg-foreground text-background w-full py-12 px-8 min-h-[calc(40vh)]">
     <div className="max-w-7xl mx-auto px-6 text-center md:text-left">
       <div className="grid gap-12 grid-cols-1 md:grid-cols-2 md:grid-rows-[1fr_0.5fr]">
         <div className="space-y-2">
