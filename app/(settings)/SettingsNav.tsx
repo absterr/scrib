@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -18,8 +19,12 @@ const SettingsNav = () => {
 
   return (
     <nav className="flex flex-col items-center">
-      <div>
+      <div className="flex items-center gap-20">
+        <Link href={"/"} className="pb-7 pl-5">
+          <ArrowLeft />
+        </Link>
         <h1 className="font-bold text-2xl">Settings</h1>
+        <div className="px-4"></div>
       </div>
       <div className="flex gap-8">
         {navItems.map(({ title, url }) => (
