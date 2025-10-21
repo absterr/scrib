@@ -35,7 +35,7 @@ const AccountPage = async () => {
   ];
 
   return (
-    <section className="max-w-2xs md:max-w-lg lg:max-w-3xl mx-auto pt-16 md:pt-20 flex flex-col gap-18">
+    <section className="max-w-xs md:max-w-lg lg:max-w-3xl mx-auto pt-16 md:pt-20 flex flex-col gap-18">
       <div className="flex flex-col gap-6">
         <h2 className="font-semibold text-xl md:text-2xl">Personal details</h2>
         <div className="flex flex-col gap-6">

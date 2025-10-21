@@ -50,7 +50,7 @@ const BillingPage = async ({
         );
 
   return (
-    <section className="max-w-2xs md:max-w-md lg:max-w-2xl mx-auto">
+    <section className="max-w-xs md:max-w-md lg:max-w-2xl mx-auto">
       {showAlert && <AlertMessage action={action} status={status} />}
       <div className="pt-16 md:pt-20 flex flex-col items-center gap-2 md:gap-4 lg:gap-8">
         <h1 className="font-bold text-lg md:text-2xl lg:text-3xl text-center">

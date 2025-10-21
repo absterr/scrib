@@ -20,13 +20,13 @@ const SettingsNav = () => {
   return (
     <nav className="flex flex-col items-center">
       <div className="flex items-center gap-20">
-        <Link href={"/"} className="pb-7 pl-5">
+        <Link href={"/"} className="pb-7 pr-4">
           <ArrowLeft />
         </Link>
         <h1 className="font-bold text-2xl">Settings</h1>
         <div className="px-4"></div>
       </div>
-      <div className="flex gap-8">
+      <div className="flex gap-10">
         {navItems.map(({ title, url }) => (
           <div key={title} className="relative">
             <Link

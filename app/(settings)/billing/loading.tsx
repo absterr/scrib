@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 
 const BillingLoading = () => (
-  <div className="max-w-2xs md:max-w-md lg:max-w-2xl mx-auto">
+  <div className="max-w-xs md:max-w-md lg:max-w-2xl mx-auto">
     <div className="pt-16 md:pt-20 flex flex-col items-center gap-8">
       <div className="md:pb-2 lg:pb-6">
         <Skeleton className="h-7 md:h-9 w-62 md:w-98" />
