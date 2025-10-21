@@ -35,9 +35,9 @@ const AccountPage = async () => {
   ];
 
   return (
-    <section className="max-w-3xl mx-auto pt-20 flex flex-col gap-18">
+    <section className="max-w-2xs md:max-w-lg lg:max-w-3xl mx-auto pt-16 md:pt-20 flex flex-col gap-18">
       <div className="flex flex-col gap-6">
-        <h2 className="font-semibold text-2xl">Personal details</h2>
+        <h2 className="font-semibold text-xl md:text-2xl">Personal details</h2>
         <div className="flex flex-col gap-6">
           {formDetails.map((detail) => (
             <DetailsForm
@@ -50,15 +50,19 @@ const AccountPage = async () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        <h2 className="font-semibold text-2xl">Manage account</h2>
+        <h2 className="font-semibold text-xl md:text-2xl">Manage account</h2>
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-lg">Delete account</h3>
-            <p className="text-neutral-700">
+            <h3 className="font-semibold text-base md:text-lg">
+              Delete account
+            </h3>
+            <p className="text-neutral-700 text-sm md:text-base">
               Permanently delete your scrib account
             </p>
           </div>
-          <DeleteAccountDialog userId={userId} />
+          <div className="px-1.5">
+            <DeleteAccountDialog userId={userId} />
+          </div>
         </div>
       </div>
     </section>

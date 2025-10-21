@@ -69,14 +69,14 @@ const DetailsForm = ({
       >
         <div className="flex justify-between">
           <div>
-            <h3 className="font-semibold text-lg">
+            <h3 className="font-semibold text-base md:text-lg">
               {isOpen ? purpose : title}
             </h3>
-            <p className="text-neutral-700">
+            <p className="text-neutral-700 text-sm md:text-base">
               {isOpen ? description : placeholder}
             </p>
           </div>
-          <CollapsibleTrigger className="hover:underline font-semibold">
+          <CollapsibleTrigger className="hover:underline font-semibold px-1.5">
             {isOpen ? "Cancel" : "Edit"}
           </CollapsibleTrigger>
         </div>

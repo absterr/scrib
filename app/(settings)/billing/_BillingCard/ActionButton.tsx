@@ -67,7 +67,7 @@ const ActionButton = ({
   if (subscriptionStatus === "active" && currentPlan !== "Hobby") {
     return (
       <Button
-        className="rounded-3xl py-5"
+        className="rounded-3xl py-4 md:py-5"
         variant={"destructive"}
         disabled={isPending}
         onClick={handleCancelPlan}
@@ -79,7 +79,7 @@ const ActionButton = ({
 
   return (
     <Button
-      className="rounded-3xl py-5"
+      className="rounded-3xl py-4 md:py-5"
       disabled={isPending}
       onClick={handleSelectPlan}
     >

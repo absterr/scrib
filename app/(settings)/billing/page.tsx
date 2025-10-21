@@ -50,24 +50,25 @@ const BillingPage = async ({
         );
 
   return (
-    <>
-      <section className="max-w-2xl mx-auto">
-        {showAlert && <AlertMessage action={action} status={status} />}
-        <div className="pt-20 flex flex-col items-center gap-8">
-          <h1 className="font-bold text-3xl text-center">
-            {userInfo.currentPlan === "Hobby"
-              ? "Get access to pro features"
-              : "You're subscribed to the pro plan"}
-          </h1>
-          {visiblePlan.map((p) => (
-            <BillingCard plan={p} userInfo={userInfo} key={p.name} />
-          ))}
-          <Link href={"/pricing"} className="text-neutral-500 underline">
-            See all plans and features
-          </Link>
-        </div>
-      </section>
-    </>
+    <section className="max-w-2xs md:max-w-md lg:max-w-2xl mx-auto">
+      {showAlert && <AlertMessage action={action} status={status} />}
+      <div className="pt-16 md:pt-20 flex flex-col items-center gap-2 md:gap-4 lg:gap-8">
+        <h1 className="font-bold text-lg md:text-2xl lg:text-3xl text-center">
+          {userInfo.currentPlan === "Hobby"
+            ? "Get access to pro features"
+            : "You're subscribed to the pro plan"}
+        </h1>
+        {visiblePlan.map((p) => (
+          <BillingCard plan={p} userInfo={userInfo} key={p.name} />
+        ))}
+        <Link
+          href={"/pricing"}
+          className="text-neutral-500 underline text-sm md:text-base pt-4 lg:pt-0"
+        >
+          See all plans and features
+        </Link>
+      </div>
+    </section>
   );
 };
 

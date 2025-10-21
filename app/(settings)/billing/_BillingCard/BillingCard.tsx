@@ -23,11 +23,14 @@ const BillingCard = ({
       <div className="flex justify-between items-center">
         <CardHeader className="w-full">
           <CardTitle>
-            <h2 className="font-semibold text-2xl">{name}</h2>
-            <strong className="text-4xl">{price}</strong>
-            <span className="inline text-neutral-500"> /{interval}</span>
+            <h2 className="font-semibold md:text-lg lg:text-2xl">{name}</h2>
+            <strong className="text-3xl lg:text-4xl">{price}</strong>
+            <span className="inline text-neutral-500 text-sm lg:text-base">
+              {" "}
+              /{interval}
+            </span>
           </CardTitle>
-          <p className="text-neutral-600">
+          <p className="text-neutral-600 text-sm lg:text-base">
             {interval === "month" ? "Billed monthly" : "Billed annually"}
             <br />
             {userInfo.currentPlan === "Hobby" && description}
