@@ -3,7 +3,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User, UserRole } from "@/lib/utils";
-import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import ManageUser from "./ManageUser";
 

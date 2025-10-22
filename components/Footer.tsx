@@ -11,15 +11,15 @@ const footerLinks = [
   },
   {
     name: "𝕏 (Twitter)",
-    url: "twitter",
+    url: "https://x.com/_absterr",
   },
   {
     name: "LinkedIn",
-    url: "linkedIn",
+    url: "https://linkedin.com/in/abba-is-haq-b1457932",
   },
   {
     name: "Github",
-    url: "github",
+    url: "https://github.com/absterr",
   },
 ];
 
@@ -44,11 +44,11 @@ const Footer = () => (
           </ul>
         </div>
 
-        <div className="text-sm text-neutral-400 flex items-end">
+        <div className="text-sm text-neutral-400 flex items-end justify-center md:justify-start">
           <p>&copy; Scrib 2025. All rights reserved</p>
         </div>
 
-        <div className="text-sm text-neutral-400 grid md:grid-cols-3">
+        <div className="text-sm text-neutral-400 flex justify-center md:grid md:grid-cols-3">
           <div className="md:col-end-4 space-x-12 flex items-end">
             <Link href={"#"} className="hover:underline">
               Privacy policy

@@ -59,7 +59,7 @@ const ManageUser = ({
         >
           <div className="flex flex-col">
             <p>{item.role}</p>
-            <p className="text-xs text-neutral-200">{item.description}</p>
+            <p className="text-xs text-neutral-500">{item.description}</p>
           </div>
           {role === item.role && <Check />}
         </DropdownMenuItem>
